@@ -1,0 +1,287 @@
+vocabulary:
+  name: Regrid API Vocabulary
+  description: >
+    Canonical terms and definitions used across Regrid's parcel data APIs,
+    covering geospatial identifiers, property attributes, ownership fields,
+    valuation data, and zoning classifications.
+  version: 1.0.0
+  source: https://support.regrid.com/api/section/parcel-api
+
+terms:
+
+  # Identifiers
+  - term: ll_uuid
+    label: Regrid UUID
+    definition: >
+      Regrid's universal unique identifier for a parcel record. A UUID v4 string
+      that uniquely identifies each parcel in the Regrid database across all
+      jurisdictions and data refreshes.
+    type: string
+    format: uuid
+
+  - term: ll_stable_id
+    label: Regrid Stable ID
+    definition: >
+      A stable identifier assigned to each parcel that persists across data updates
+      and schema refreshes, enabling long-term tracking of a parcel even as
+      underlying data changes.
+    type: string
+
+  - term: path
+    label: Regrid Canonical Path
+    definition: >
+      Regrid's hierarchical canonical path for a parcel, formatted as
+      {country}/{state}/{county}/{parcel_id} (e.g., us/ca/san-francisco/1234567890).
+      Used for parcel path lookups via the /parcels/path endpoint.
+    type: string
+
+  - term: parcelnumb
+    label: Assessor Parcel Number (APN)
+    definition: >
+      The Assessor Parcel Number as reported by the local county assessor's office.
+      Format varies by jurisdiction. Also referred to as APN, tax parcel number,
+      or parcel identification number (PIN).
+    type: string
+
+  - term: parcelnumb_no_formatting
+    label: APN Without Formatting
+    definition: >
+      The Assessor Parcel Number with all formatting characters (dashes, spaces,
+      dots) stripped, enabling consistent string matching across jurisdictions.
+    type: string
+
+  # Geographic fields
+  - term: state_abbr
+    label: State Abbreviation
+    definition: >
+      Two-letter US Postal Service state abbreviation (e.g., CA, TX, NY).
+    type: string
+
+  - term: county
+    label: County Name
+    definition: >
+      Name of the county (or county-equivalent jurisdiction) in which the parcel
+      is located.
+    type: string
+
+  - term: ll_gisacre
+    label: GIS Acres
+    definition: >
+      Parcel area in acres as computed from the GIS polygon geometry. More accurate
+      than assessor-reported acreage for parcels with known boundary data.
+    type: number
+    unit: acres
+
+  - term: ll_gissqft
+    label: GIS Square Feet
+    definition: >
+      Parcel area in square feet as computed from the GIS polygon geometry.
+    type: number
+    unit: square_feet
+
+  # Address fields
+  - term: ll_address
+    label: Regrid Standardized Address
+    definition: >
+      Full parcel address standardized and normalized by Regrid from assessor
+      source data. Used as the canonical address for the parcel.
+    type: string
+
+  - term: saddno
+    label: Street Number
+    definition: Street address number component of the parcel site address.
+    type: string
+
+  - term: saddstr
+    label: Street Name
+    definition: Street name component of the parcel site address.
+    type: string
+
+  - term: saddsttyp
+    label: Street Type
+    definition: >
+      Street type abbreviation (e.g., St, Ave, Blvd, Dr, Ln, Rd, Way).
+    type: string
+
+  - term: saddpref
+    label: Street Direction Prefix
+    definition: >
+      Directional prefix for the street name (e.g., N, S, E, W, NE, NW, SE, SW).
+    type: string
+
+  - term: szip
+    label: ZIP Code
+    definition: 5-digit US ZIP code for the parcel site address.
+    type: string
+
+  # Ownership fields
+  - term: owner
+    label: Primary Owner
+    definition: >
+      Name of the primary parcel owner as reported by the county assessor.
+      May be an individual, corporation, LLC, trust, or government entity.
+    type: string
+
+  - term: owner2
+    label: Secondary Owner
+    definition: >
+      Name of the second owner listed on the parcel record, typically for
+      co-ownership or married couples.
+    type: string
+
+  - term: owntype
+    label: Owner Type
+    definition: >
+      Classification of the parcel owner (e.g., Individual, Corporation, LLC,
+      Trust, Government, Non-Profit).
+    type: string
+
+  - term: mail_address
+    label: Owner Mailing Address
+    definition: >
+      Mailing address for the parcel owner, which may differ from the site
+      address for investment properties, rental units, or absentee owners.
+    type: string
+
+  # Valuation fields
+  - term: parval
+    label: Total Assessed Value
+    definition: >
+      Total assessed value of the parcel (land + improvements) as reported by
+      the county assessor for property tax purposes. Expressed in USD.
+    type: number
+    unit: USD
+
+  - term: landval
+    label: Assessed Land Value
+    definition: >
+      Assessed value of the land portion of the parcel, excluding any structures
+      or improvements. Expressed in USD.
+    type: number
+    unit: USD
+
+  - term: improvval
+    label: Assessed Improvement Value
+    definition: >
+      Assessed value of structures and improvements on the parcel, excluding
+      the underlying land. Expressed in USD.
+    type: number
+    unit: USD
+
+  - term: saleprice
+    label: Sale Price
+    definition: >
+      Sale price from the most recent recorded deed transfer for the parcel.
+      Expressed in USD. May be $0 for non-arm's-length transfers.
+    type: number
+    unit: USD
+
+  - term: saledate
+    label: Sale Date
+    definition: >
+      Date of the most recent recorded deed transfer for the parcel.
+    type: string
+    format: date
+
+  - term: taxyear
+    label: Tax Year
+    definition: >
+      The tax assessment year for which the assessed value fields (parval,
+      landval, improvval) are reported.
+    type: integer
+
+  # Structure fields
+  - term: yearbuilt
+    label: Year Built
+    definition: >
+      Year the primary structure on the parcel was constructed, as reported
+      by the county assessor.
+    type: integer
+
+  - term: numstories
+    label: Number of Stories
+    definition: >
+      Number of above-ground stories in the primary structure on the parcel.
+    type: number
+
+  - term: numunits
+    label: Number of Units
+    definition: >
+      Number of dwelling or commercial units contained in the building(s)
+      on the parcel.
+    type: integer
+
+  - term: ll_bldg_count
+    label: Building Count
+    definition: >
+      Number of building footprints matched to this parcel from Regrid's
+      building footprint dataset.
+    type: integer
+
+  # Zoning and use fields
+  - term: zoning
+    label: Zoning Code
+    definition: >
+      Zoning code or classification as reported by the local assessor or
+      planning authority. Format varies by jurisdiction.
+    type: string
+
+  - term: zoning_description
+    label: Zoning Description
+    definition: >
+      Standardized plain-language description of the zoning classification
+      from Regrid's standardized zoning dataset.
+    type: string
+
+  - term: usecode
+    label: Land Use Code
+    definition: >
+      Standardized land use code assigned by the county assessor indicating
+      the primary use classification of the parcel.
+    type: string
+
+  - term: usedesc
+    label: Land Use Description
+    definition: >
+      Human-readable description of the land use code (e.g., Single Family
+      Residential, Commercial, Agricultural, Industrial).
+    type: string
+
+  # API concepts
+  - term: token
+    label: API Token
+    definition: >
+      Authentication credential required for all Regrid API requests. Obtained
+      from the API section of your Regrid account profile. Passed as a query
+      parameter named 'token'.
+    type: string
+
+  - term: GeoJSON FeatureCollection
+    label: GeoJSON FeatureCollection
+    definition: >
+      The standard response envelope for Regrid API parcel search endpoints.
+      Conforms to RFC 7946 GeoJSON specification. Contains a 'features' array
+      of GeoJSON Feature objects, each representing one parcel record.
+    type: object
+
+  - term: verse
+    label: Coverage Verse
+    definition: >
+      Regrid's term for the county-level coverage metadata table, accessible
+      via the /verse endpoint. Provides parcel counts, field availability,
+      and last-refresh dates for all covered jurisdictions.
+    type: object
+
+  - term: ll_addr_unit
+    label: Address Unit
+    definition: >
+      Unit, suite, or apartment designator for multi-unit parcels or buildings
+      with secondary addresses.
+    type: string
+
+  - term: parvaltype
+    label: Parcel Value Type
+    definition: >
+      Indicates the basis of the assessed value (e.g., market value, appraised
+      value, taxable value). Varies by jurisdiction.
+    type: string

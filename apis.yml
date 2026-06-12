@@ -49,7 +49,7 @@ apis:
       - type: Documentation
         url: https://support.regrid.com/api/using-the-parcel-api
       - type: OpenAPI
-        url: https://app.regrid.com
+        url: openapi/regrid-parcel-openapi.yml
   - name: Regrid Tile API
     description: >
       Tile Map Service (TMS) providing interactive vector and raster map layers
@@ -129,6 +129,18 @@ common:
     url: rate-limits/regrid-rate-limits.yml
   - type: FinOps
     url: finops/regrid-finops.yml
+  - type: Vocabulary
+    url: vocabulary/regrid-vocabulary.yml
+  - type: JSONSchema
+    url: json-schema/regrid-parcel-properties.json
+  - type: JSONLDContext
+    url: json-ld/regrid-context.jsonld
+  - type: Example
+    url: examples/parcel-point-lookup-response.json
+  - type: Example
+    url: examples/parcel-area-search-request.json
+  - type: Blogs
+    url: blogs/blogs.json
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

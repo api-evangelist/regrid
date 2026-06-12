@@ -1,0 +1,247 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://regrid.com/ontology/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "geo": "http://www.opengis.net/ont/geosparql#",
+    "geojson": "https://purl.org/geojson/vocab#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Parcel": {
+      "@id": "https://regrid.com/ontology/Parcel",
+      "@type": "@id"
+    },
+    "ParcelFeatureCollection": {
+      "@id": "geojson:FeatureCollection",
+      "@type": "@id"
+    },
+    "ParcelFeature": {
+      "@id": "geojson:Feature",
+      "@type": "@id"
+    },
+
+    "ll_uuid": {
+      "@id": "https://regrid.com/ontology/uuid",
+      "@type": "xsd:string"
+    },
+    "ll_stable_id": {
+      "@id": "https://regrid.com/ontology/stableId",
+      "@type": "xsd:string"
+    },
+    "path": {
+      "@id": "https://regrid.com/ontology/canonicalPath",
+      "@type": "xsd:string"
+    },
+    "ll_updated_at": {
+      "@id": "dcterms:modified",
+      "@type": "xsd:dateTime"
+    },
+
+    "parcelnumb": {
+      "@id": "https://regrid.com/ontology/assessorParcelNumber",
+      "@type": "xsd:string"
+    },
+    "parcelnumb_no_formatting": {
+      "@id": "https://regrid.com/ontology/assessorParcelNumberRaw",
+      "@type": "xsd:string"
+    },
+
+    "state_abbr": {
+      "@id": "schema:addressRegion",
+      "@type": "xsd:string"
+    },
+    "county": {
+      "@id": "https://regrid.com/ontology/county",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "schema:addressLocality",
+      "@type": "xsd:string"
+    },
+    "state2": {
+      "@id": "https://regrid.com/ontology/stateName",
+      "@type": "xsd:string"
+    },
+
+    "ll_address": {
+      "@id": "https://regrid.com/ontology/standardizedAddress",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "schema:streetAddress",
+      "@type": "xsd:string"
+    },
+    "saddno": {
+      "@id": "https://regrid.com/ontology/streetNumber",
+      "@type": "xsd:string"
+    },
+    "saddstr": {
+      "@id": "https://regrid.com/ontology/streetName",
+      "@type": "xsd:string"
+    },
+    "saddsttyp": {
+      "@id": "https://regrid.com/ontology/streetType",
+      "@type": "xsd:string"
+    },
+    "saddpref": {
+      "@id": "https://regrid.com/ontology/streetDirectionPrefix",
+      "@type": "xsd:string"
+    },
+    "saddstsuf": {
+      "@id": "https://regrid.com/ontology/streetDirectionSuffix",
+      "@type": "xsd:string"
+    },
+    "sunit": {
+      "@id": "https://regrid.com/ontology/unitDesignator",
+      "@type": "xsd:string"
+    },
+    "szip": {
+      "@id": "schema:postalCode",
+      "@type": "xsd:string"
+    },
+    "scity": {
+      "@id": "https://regrid.com/ontology/siteCity",
+      "@type": "xsd:string"
+    },
+
+    "mail_address": {
+      "@id": "https://regrid.com/ontology/mailingAddress",
+      "@type": "xsd:string"
+    },
+    "mail_city": {
+      "@id": "https://regrid.com/ontology/mailingCity",
+      "@type": "xsd:string"
+    },
+    "mail_state2": {
+      "@id": "https://regrid.com/ontology/mailingState",
+      "@type": "xsd:string"
+    },
+    "mail_zip": {
+      "@id": "https://regrid.com/ontology/mailingZip",
+      "@type": "xsd:string"
+    },
+    "mail_country": {
+      "@id": "https://regrid.com/ontology/mailingCountry",
+      "@type": "xsd:string"
+    },
+
+    "owner": {
+      "@id": "schema:owner",
+      "@type": "xsd:string"
+    },
+    "owner2": {
+      "@id": "https://regrid.com/ontology/secondaryOwner",
+      "@type": "xsd:string"
+    },
+    "owner3": {
+      "@id": "https://regrid.com/ontology/tertiaryOwner",
+      "@type": "xsd:string"
+    },
+    "owntype": {
+      "@id": "https://regrid.com/ontology/ownerType",
+      "@type": "xsd:string"
+    },
+
+    "zoning": {
+      "@id": "https://regrid.com/ontology/zoningCode",
+      "@type": "xsd:string"
+    },
+    "zoning_description": {
+      "@id": "https://regrid.com/ontology/zoningDescription",
+      "@type": "xsd:string"
+    },
+    "usecode": {
+      "@id": "https://regrid.com/ontology/landUseCode",
+      "@type": "xsd:string"
+    },
+    "usedesc": {
+      "@id": "https://regrid.com/ontology/landUseDescription",
+      "@type": "xsd:string"
+    },
+
+    "ll_gisacre": {
+      "@id": "https://regrid.com/ontology/gisAcres",
+      "@type": "xsd:decimal"
+    },
+    "ll_gissqft": {
+      "@id": "https://regrid.com/ontology/gisSquareFeet",
+      "@type": "xsd:decimal"
+    },
+    "acres": {
+      "@id": "https://regrid.com/ontology/reportedAcres",
+      "@type": "xsd:decimal"
+    },
+    "sqft": {
+      "@id": "https://regrid.com/ontology/reportedSquareFeet",
+      "@type": "xsd:decimal"
+    },
+
+    "ll_bldg_count": {
+      "@id": "https://regrid.com/ontology/buildingCount",
+      "@type": "xsd:integer"
+    },
+    "yearbuilt": {
+      "@id": "schema:yearBuilt",
+      "@type": "xsd:integer"
+    },
+    "numstories": {
+      "@id": "https://regrid.com/ontology/numberOfStories",
+      "@type": "xsd:decimal"
+    },
+    "numunits": {
+      "@id": "https://regrid.com/ontology/numberOfUnits",
+      "@type": "xsd:integer"
+    },
+    "structno": {
+      "@id": "https://regrid.com/ontology/numberOfStructures",
+      "@type": "xsd:integer"
+    },
+
+    "parval": {
+      "@id": "https://regrid.com/ontology/totalAssessedValue",
+      "@type": "xsd:decimal"
+    },
+    "landval": {
+      "@id": "https://regrid.com/ontology/assessedLandValue",
+      "@type": "xsd:decimal"
+    },
+    "improvval": {
+      "@id": "https://regrid.com/ontology/assessedImprovementValue",
+      "@type": "xsd:decimal"
+    },
+    "saleprice": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "saledate": {
+      "@id": "https://regrid.com/ontology/saleDate",
+      "@type": "xsd:date"
+    },
+    "parvaltype": {
+      "@id": "https://regrid.com/ontology/assessedValueType",
+      "@type": "xsd:string"
+    },
+    "taxyear": {
+      "@id": "https://regrid.com/ontology/taxYear",
+      "@type": "xsd:integer"
+    },
+
+    "geometry": {
+      "@id": "geo:hasGeometry",
+      "@type": "@id"
+    },
+    "features": {
+      "@id": "geojson:features",
+      "@container": "@set"
+    },
+    "properties": {
+      "@id": "geojson:properties"
+    },
+    "type": "@type",
+    "id": "@id",
+    "coordinates": {
+      "@id": "geo:asWKT"
+    }
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/regrid/json-schema/regrid-parcel-properties.json",
+  "title": "Regrid Parcel Properties",
+  "description": "JSON Schema for the properties object of a Regrid parcel GeoJSON Feature.",
+  "type": "object",
+  "properties": {
+    "ll_uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Regrid universal unique identifier for the parcel"
+    },
+    "ll_stable_id": {
+      "type": "string",
+      "description": "Stable identifier that persists across data updates"
+    },
+    "path": {
+      "type": "string",
+      "description": "Regrid canonical path (e.g., us/ca/san-francisco/1234567890)"
+    },
+    "ll_updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of last Regrid data update"
+    },
+    "ll_gisacre": {
+      "type": "number",
+      "description": "Parcel area in acres (GIS-calculated)",
+      "minimum": 0
+    },
+    "ll_gissqft": {
+      "type": "number",
+      "description": "Parcel area in square feet (GIS-calculated)",
+      "minimum": 0
+    },
+    "ll_bldg_count": {
+      "type": "integer",
+      "description": "Number of buildings on the parcel",
+      "minimum": 0
+    },
+    "ll_address": {
+      "type": "string",
+      "description": "Regrid standardized parcel address"
+    },
+    "ll_addresstype": {
+      "type": "string",
+      "description": "Address type classification"
+    },
+    "ll_addr_unit": {
+      "type": ["string", "null"],
+      "description": "Unit/suite/apt number for multi-unit parcels"
+    },
+    "parcelnumb": {
+      "type": "string",
+      "description": "Assessor Parcel Number (APN) as reported by the county"
+    },
+    "parcelnumb_no_formatting": {
+      "type": "string",
+      "description": "APN with all formatting characters stripped"
+    },
+    "state_abbr": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2,
+      "description": "Two-letter US state abbreviation"
+    },
+    "county": {
+      "type": "string",
+      "description": "County name"
+    },
+    "city": {
+      "type": "string",
+      "description": "City name"
+    },
+    "cityname": {
+      "type": "string",
+      "description": "Formatted city name"
+    },
+    "state2": {
+      "type": "string",
+      "description": "Full state name"
+    },
+    "saddno": {
+      "type": "string",
+      "description": "Street address number"
+    },
+    "saddpref": {
+      "type": ["string", "null"],
+      "description": "Street direction prefix (N, S, E, W, NE, NW, SE, SW)"
+    },
+    "saddstr": {
+      "type": "string",
+      "description": "Street name"
+    },
+    "saddsttyp": {
+      "type": "string",
+      "description": "Street type abbreviation (St, Ave, Blvd, Dr, etc.)"
+    },
+    "saddstsuf": {
+      "type": ["string", "null"],
+      "description": "Street direction suffix"
+    },
+    "sunit": {
+      "type": ["string", "null"],
+      "description": "Unit designator"
+    },
+    "szip": {
+      "type": "string",
+      "pattern": "^\\d{5}$",
+      "description": "5-digit ZIP code"
+    },
+    "szip4": {
+      "type": ["string", "null"],
+      "pattern": "^\\d{4}$",
+      "description": "ZIP+4 extension code"
+    },
+    "address": {
+      "type": "string",
+      "description": "Full site address string"
+    },
+    "scity": {
+      "type": "string",
+      "description": "Site city name"
+    },
+    "mail_address": {
+      "type": ["string", "null"],
+      "description": "Owner mailing address"
+    },
+    "mail_city": {
+      "type": ["string", "null"],
+      "description": "Owner mailing city"
+    },
+    "mail_state2": {
+      "type": ["string", "null"],
+      "description": "Owner mailing state abbreviation"
+    },
+    "mail_zip": {
+      "type": ["string", "null"],
+      "description": "Owner mailing ZIP code"
+    },
+    "mail_country": {
+      "type": ["string", "null"],
+      "description": "Owner mailing country"
+    },
+    "owner": {
+      "type": ["string", "null"],
+      "description": "Primary owner name"
+    },
+    "owner2": {
+      "type": ["string", "null"],
+      "description": "Secondary owner name"
+    },
+    "owner3": {
+      "type": ["string", "null"],
+      "description": "Tertiary owner name"
+    },
+    "owntype": {
+      "type": ["string", "null"],
+      "description": "Owner type classification"
+    },
+    "zoning": {
+      "type": ["string", "null"],
+      "description": "Zoning code as reported by the assessor"
+    },
+    "zoning_description": {
+      "type": ["string", "null"],
+      "description": "Standardized zoning description"
+    },
+    "usecode": {
+      "type": ["string", "null"],
+      "description": "Land use code as reported by the assessor"
+    },
+    "usedesc": {
+      "type": ["string", "null"],
+      "description": "Land use description"
+    },
+    "structno": {
+      "type": ["integer", "null"],
+      "description": "Number of structures on the parcel",
+      "minimum": 0
+    },
+    "yearbuilt": {
+      "type": ["integer", "null"],
+      "description": "Year of primary structure construction",
+      "minimum": 1600,
+      "maximum": 2100
+    },
+    "numstories": {
+      "type": ["number", "null"],
+      "description": "Number of stories in the primary structure",
+      "minimum": 0
+    },
+    "numunits": {
+      "type": ["integer", "null"],
+      "description": "Number of units in the building",
+      "minimum": 0
+    },
+    "acres": {
+      "type": ["number", "null"],
+      "description": "Parcel area in acres (assessor-reported)",
+      "minimum": 0
+    },
+    "sqft": {
+      "type": ["number", "null"],
+      "description": "Parcel area in square feet (assessor-reported)",
+      "minimum": 0
+    },
+    "improvval": {
+      "type": ["number", "null"],
+      "description": "Assessed improvement (structure) value in USD",
+      "minimum": 0
+    },
+    "landval": {
+      "type": ["number", "null"],
+      "description": "Assessed land value in USD",
+      "minimum": 0
+    },
+    "parval": {
+      "type": ["number", "null"],
+      "description": "Total assessed parcel value in USD",
+      "minimum": 0
+    },
+    "saleprice": {
+      "type": ["number", "null"],
+      "description": "Most recent recorded sale price in USD",
+      "minimum": 0
+    },
+    "saledate": {
+      "type": ["string", "null"],
+      "description": "Most recent recorded sale date"
+    },
+    "parvaltype": {
+      "type": ["string", "null"],
+      "description": "Type of assessed value (market, appraised, taxable, etc.)"
+    },
+    "taxyear": {
+      "type": ["integer", "null"],
+      "description": "Tax assessment year"
+    }
+  },
+  "required": [
+    "ll_uuid",
+    "path",
+    "parcelnumb",
+    "state_abbr",
+    "county"
+  ],
+  "additionalProperties": true
+}

@@ -1,0 +1,16 @@
+{
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-122.4210, 37.7760],
+        [-122.4180, 37.7760],
+        [-122.4180, 37.7740],
+        [-122.4210, 37.7740],
+        [-122.4210, 37.7760]
+      ]
+    ]
+  },
+  "limit": 50,
+  "fields": "ll_uuid,parcelnumb,owner,address,parval,zoning,usedesc,ll_gisacre,yearbuilt"
+}

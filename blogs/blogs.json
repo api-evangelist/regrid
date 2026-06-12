@@ -1,0 +1,11 @@
+{
+  "blogs": [
+    {
+      "name": "Regrid Blog",
+      "url": "https://regrid.com/blog",
+      "rss": null,
+      "last_checked": "2026-06-12",
+      "notes": "No RSS/Atom feed discovered at standard paths (/rss, /feed, /blog/rss, /blog/feed). Blog is available at https://regrid.com/blog but does not expose a machine-readable feed."
+    }
+  ]
+}

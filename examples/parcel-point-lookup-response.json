@@ -1,0 +1,78 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "us/ca/san-francisco/1234567890",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-122.4194, 37.7749],
+            [-122.4190, 37.7749],
+            [-122.4190, 37.7745],
+            [-122.4194, 37.7745],
+            [-122.4194, 37.7749]
+          ]
+        ]
+      },
+      "properties": {
+        "ll_uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "ll_stable_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "path": "us/ca/san-francisco/1234567890",
+        "ll_updated_at": "2026-06-01T12:00:00Z",
+        "ll_gisacre": 0.12,
+        "ll_gissqft": 5227.2,
+        "ll_bldg_count": 1,
+        "ll_address": "123 Main St, San Francisco, CA 94105",
+        "ll_addresstype": "standard",
+        "ll_addr_unit": null,
+        "parcelnumb": "1234-567-890",
+        "parcelnumb_no_formatting": "1234567890",
+        "state_abbr": "CA",
+        "county": "San Francisco",
+        "city": "San Francisco",
+        "cityname": "San Francisco",
+        "state2": "California",
+        "saddno": "123",
+        "saddpref": null,
+        "saddstr": "Main",
+        "saddsttyp": "St",
+        "saddstsuf": null,
+        "sunit": null,
+        "szip": "94105",
+        "szip4": "1234",
+        "address": "123 Main St",
+        "scity": "San Francisco",
+        "mail_address": "123 Main St",
+        "mail_city": "San Francisco",
+        "mail_state2": "CA",
+        "mail_zip": "94105",
+        "mail_country": "US",
+        "owner": "SMITH JOHN A",
+        "owner2": null,
+        "owner3": null,
+        "owntype": "Individual",
+        "zoning": "RH-1",
+        "zoning_description": "Residential House - One Family",
+        "usecode": "01",
+        "usedesc": "Single Family Residential",
+        "structno": 1,
+        "yearbuilt": 1954,
+        "numstories": 2.0,
+        "numunits": 1,
+        "acres": 0.12,
+        "sqft": 5227,
+        "improvval": 850000,
+        "landval": 650000,
+        "parval": 1500000,
+        "saleprice": 1350000,
+        "saledate": "2021-05-15",
+        "parvaltype": "market",
+        "taxyear": 2025
+      }
+    }
+  ],
+  "results": 1,
+  "next": null
+}
