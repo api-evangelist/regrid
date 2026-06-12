@@ -1,0 +1,64 @@
+specification: API Commons Rate Limits 0.1
+provider: Regrid
+providerId: regrid
+created: 2026-06-12
+modified: 2026-06-12
+description: >
+  Regrid enforces rate limits on all Parcel API requests to ensure platform
+  stability and fair usage. Limits apply to all authenticated API tokens.
+  Exceeding rate limits returns an HTTP 429 response. Additional capacity
+  beyond the default limits is available by contacting the Regrid sales team.
+rateLimits:
+  - name: Concurrent Requests
+    description: Maximum number of simultaneous API requests per token
+    limit: 10
+    unit: concurrent requests
+    scope: per token
+    throttled: true
+    throttleCode: 429
+    notes: >
+      No more than 10 API requests may be in-flight simultaneously for a
+      given API token. Requests exceeding this threshold are rejected with
+      a 429 rate limit error.
+  - name: Requests Per Minute
+    description: Approximate maximum API requests per minute per token
+    limit: 200
+    unit: requests per minute
+    scope: per token
+    throttled: true
+    throttleCode: 429
+    retryAfter: true
+    retryAfterHeader: Retry-After
+    notes: >
+      Approximately 200 API requests per minute are permitted per token.
+      This is an approximate limit based on the 10 concurrent request cap.
+      Requests exceeding the per-minute threshold receive a 429 error.
+  - name: Records Per Request
+    description: Maximum parcel records returned in a single API response
+    default: 20
+    limit: 1000
+    unit: parcel records per request
+    scope: per request
+    notes: >
+      Each API response returns up to 20 parcel records by default. This
+      limit may be increased up to 1,000 records per request via the limit
+      parameter. Records returned count toward monthly billing allocation.
+  - name: Usage Monitoring
+    description: Account usage endpoint for tracking remaining monthly allocation
+    endpoint: /usage
+    throttled: false
+    notes: >
+      The /usage endpoint returns current API consumption summary and does
+      not count against the monthly parcel record allocation. The /usage/detailed
+      endpoint provides granular breakdowns by endpoint and date.
+throttling:
+  errorCode: 429
+  description: HTTP 429 Too Many Requests is returned when concurrent or per-minute limits are exceeded
+  retryStrategy: >
+    Clients should implement exponential back-off when receiving 429 responses.
+    Check the Retry-After header if present for the recommended wait interval
+    before retrying the request.
+additionalCapacity:
+  available: true
+  contact: parcels@regrid.com
+  notes: Higher rate limits and additional API capacity are available through the Regrid sales team for enterprise and high-volume use cases.

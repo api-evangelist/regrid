@@ -1,0 +1,134 @@
+aid: regrid
+name: Regrid
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/regrid/refs/heads/main/apis.yml
+created: 2026-06-12
+modified: 2026-06-12
+specificationVersion: '0.19'
+description: >
+  Regrid is a national land parcel data platform providing REST APIs for querying
+  parcel boundaries, ownership, zoning, assessed values, and deed records across
+  all US counties and Canadian provinces. The platform offers a Parcel API for
+  retrieving structured GeoJSON parcel records by location, address, APN, owner,
+  or polygon area, alongside a Tile API delivering raster and vector map layers.
+  Additional APIs cover matched secondary addresses, building footprints, standardized
+  zoning, and daily ownership updates. Authentication uses API token parameters,
+  billing is metered by parcel records returned, and self-serve monthly subscriptions
+  are available in Standard and Premium schema tiers with enterprise custom packages
+  also offered.
+tags:
+  - Parcels
+  - Land Data
+  - Property Data
+  - GeoJSON
+  - Real Estate
+  - Zoning
+  - Ownership
+  - Geospatial
+  - Mapping
+  - Tiles
+apis:
+  - name: Regrid Parcel API
+    description: >
+      RESTful API for querying US and Canadian parcel records by location (lat/lon),
+      street address, assessor parcel number (APN), owner name, or polygon area.
+      Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning,
+      assessed values, and deed attributes. Supports up to 1,000 records per request
+      with usage tracked by parcel records returned for billing purposes.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://regrid.com/parcel-api
+    baseURL: https://app.regrid.com
+    tags:
+      - Parcels
+      - Land Data
+      - Property Data
+      - GeoJSON
+      - Real Estate
+    properties:
+      - type: Documentation
+        url: https://support.regrid.com/api/using-the-parcel-api
+      - type: OpenAPI
+        url: https://app.regrid.com
+  - name: Regrid Tile API
+    description: >
+      Tile Map Service (TMS) providing interactive vector and raster map layers
+      of the full Regrid parcel dataset for embedding in web and mobile mapping
+      applications. Supports both Standard and Premium schema tile sets.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://regrid.com/api
+    baseURL: https://app.regrid.com
+    tags:
+      - Tiles
+      - Mapping
+      - Geospatial
+      - TMS
+    properties:
+      - type: Documentation
+        url: https://support.regrid.com/api/section/parcel-api
+  - name: Regrid Matched Building Footprints API
+    description: >
+      API delivering building footprint geometries matched to parcel records,
+      including building square footage and building count per parcel.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://regrid.com/api
+    baseURL: https://app.regrid.com
+    tags:
+      - Buildings
+      - Footprints
+      - Geospatial
+    properties:
+      - type: Documentation
+        url: https://support.regrid.com/api/parcel-api-endpoints
+  - name: Regrid Standardized Zoning API
+    description: >
+      API providing standardized zoning data and classifications covering major
+      US metropolitan areas, matched to parcel records.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://regrid.com/api
+    baseURL: https://app.regrid.com
+    tags:
+      - Zoning
+      - Land Use
+      - Geospatial
+    properties:
+      - type: Documentation
+        url: https://support.regrid.com/api/parcel-api-endpoints
+  - name: Regrid Daily Ownership Updates API
+    description: >
+      API providing current owner information and deeded property details with
+      daily refresh cycles for up-to-date ownership tracking.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://regrid.com/api
+    baseURL: https://app.regrid.com
+    tags:
+      - Ownership
+      - Deeds
+      - Real Estate
+    properties:
+      - type: Documentation
+        url: https://support.regrid.com/api/parcel-api-endpoints
+common:
+  - type: Website
+    url: https://regrid.com
+  - type: Documentation
+    url: https://support.regrid.com/api/section/parcel-api
+  - type: Pricing
+    url: https://app.regrid.com/api/plans
+  - type: Blog
+    url: https://regrid.com/blog
+  - type: StatusPage
+    url: https://status.regrid.com/
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/regridapp
+  - type: X
+    url: https://x.com/regridapp
+  - type: Plans
+    url: plans/regrid-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/regrid-rate-limits.yml
+  - type: FinOps
+    url: finops/regrid-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

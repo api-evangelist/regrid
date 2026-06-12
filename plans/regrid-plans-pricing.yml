@@ -1,0 +1,105 @@
+specification: API Commons Plans 0.1
+provider: Regrid
+providerId: regrid
+created: 2026-06-12
+modified: 2026-06-12
+reconciled: true
+description: >
+  Regrid offers self-serve monthly API subscription plans in Standard and Premium
+  schema tiers, billed by parcel records returned. A hybrid model applies a fixed
+  base price up to an included record limit with per-record overage pricing above
+  that threshold. A 30-day free sandbox trial is available. Enterprise custom packages
+  are available via the sales team for higher-volume or white-label use cases.
+plans:
+  - name: Free Trial / Sandbox
+    type: free
+    description: >
+      30-day free trial of the API Sandbox allowing developers to explore all
+      endpoints and test integrations before committing to a paid plan.
+    quota:
+      - name: Trial Period
+        type: boolean
+        value: true
+        unit: days
+        limit: 30
+    features:
+      - Access to API Sandbox
+      - All Parcel API endpoints
+      - Standard schema parcel attributes
+  - name: Standard Schema
+    type: paid
+    description: >
+      Monthly self-serve plan providing Parcel API access and Tile API access
+      using Regrid's standard set of standardized parcel attributes. Billing is
+      metered by parcel records returned with a fixed base price and per-record
+      overage pricing. Supports both parcel records API and tiles.
+    quota:
+      - name: Parcel Records (included)
+        type: metered
+        unit: parcel records per month
+        notes: Fixed monthly allocation; contact sales or app.regrid.com/api/plans for current limit
+      - name: API Requests
+        type: quota
+        limit: 200
+        unit: requests per minute
+    pricing:
+      model: hybrid
+      notes: Fixed base monthly price with per-record overage pricing above included limit. See app.regrid.com/api/plans for current pricing.
+    features:
+      - Parcel API access
+      - Tile API access (vector and raster)
+      - Standard parcel schema attributes
+      - GeoJSON response format
+      - Account usage monitoring endpoint
+      - Monthly maximum pricing cap
+  - name: Premium Schema
+    type: paid
+    description: >
+      Monthly self-serve plan providing Parcel API and Tile API access with the
+      full Premium schema, which includes all standard attributes plus USPS vacancy
+      indicators, residential markers, building footprint square footage, building
+      count per parcel, LBCS land-use fields, and Esri geographic enrichments.
+    quota:
+      - name: Parcel Records (included)
+        type: metered
+        unit: parcel records per month
+        notes: Fixed monthly allocation; contact sales or app.regrid.com/api/plans for current limit
+      - name: API Requests
+        type: quota
+        limit: 200
+        unit: requests per minute
+    pricing:
+      model: hybrid
+      notes: Fixed base monthly price with per-record overage pricing above included limit. See app.regrid.com/api/plans for current pricing.
+    features:
+      - All Standard Schema features
+      - USPS vacancy indicators
+      - Residential markers
+      - Building footprint square footage
+      - Building count per parcel
+      - LBCS land-use classification fields
+      - Esri geographic enrichments
+      - Matched building footprints
+      - Standardized zoning data
+      - Daily ownership updates
+  - name: Enterprise / Custom
+    type: enterprise
+    description: >
+      Custom packages for organizations with higher volume needs, white-label
+      integration requirements, or bulk data delivery via SFTP, cloud storage,
+      or Feature Service. Pricing negotiated directly with the Regrid sales team.
+    quota:
+      - name: Parcel Records
+        type: metered
+        unit: custom
+        notes: Custom allocation negotiated with sales team
+    pricing:
+      model: custom
+      contact: parcels@regrid.com
+    features:
+      - Custom record volumes
+      - Bulk SFTP delivery
+      - Cloud data delivery
+      - ArcGIS Feature Service
+      - White-label options
+      - Dedicated support

@@ -1,0 +1,93 @@
+specification: FinOps Framework 1.0
+focusVersion: '1.0'
+provider: Regrid
+providerId: regrid
+created: 2026-06-12
+modified: 2026-06-12
+description: >
+  Regrid API usage is billed on a metered consumption model where costs are
+  determined by the number of parcel records returned in API responses, not by
+  the number of API calls made. Monthly plans include a fixed allocation of parcel
+  records at a base price, with per-record overage charges applied above the
+  included threshold. Operators can set monthly maximum pricing caps and usage
+  alerts via the account dashboard to manage spend and prevent unexpected overages.
+billingModel:
+  type: hybrid
+  description: >
+    Fixed monthly base price covering an included parcel record allocation,
+    plus metered overage charges per additional parcel record above the included limit.
+  billingPeriod: monthly
+  currency: USD
+  paymentTerms: subscription
+  overageModel: per-unit
+focusColumns:
+  - column: ServiceName
+    value: Regrid Parcel API
+  - column: ServiceCategory
+    value: Developer Tools / Geospatial Data
+  - column: ChargeType
+    values:
+      - Usage
+      - Tax
+  - column: BilledCurrency
+    value: USD
+  - column: ChargeFrequency
+    value: Monthly
+  - column: PricingUnit
+    value: parcel record
+  - column: ConsumedUnit
+    value: parcel record
+meters:
+  - name: Parcel Records Returned
+    description: >
+      The primary billing meter. Each parcel record included in an API response
+      counts as one unit toward the monthly allocation and overage billing.
+      Default responses return up to 20 records; maximum is 1,000 per request.
+    unit: parcel record
+    granularity: per API response
+    billingImpact: true
+    notes: >
+      The /api/v2/parcels/point, /address, /apn, /owner, /area, and /query
+      endpoints all generate billable parcel record consumption. The /usage
+      and /usage/detailed endpoints do not generate billable consumption.
+  - name: Tile Map Requests
+    description: >
+      Tile API requests for vector or raster map tiles. Tile consumption is
+      tracked separately from parcel record consumption under bundle plans.
+    unit: tile request
+    granularity: per tile request
+    billingImpact: true
+    notes: Included in Standard and Premium schema bundle plans up to plan limits.
+principles:
+  - name: Metered Billing Transparency
+    description: >
+      Billing is tied directly to parcel records returned, not API calls made.
+      Operators can monitor exact consumption via the /usage and /usage/detailed
+      endpoints at no additional cost, enabling precise cost attribution.
+  - name: Spend Guardrails
+    description: >
+      The account dashboard supports setting a monthly maximum pricing cap to
+      prevent runaway spending. Usage alerts can be configured to notify operators
+      as consumption approaches plan limits.
+  - name: Predictable Base Cost
+    description: >
+      The hybrid model provides a predictable fixed monthly base cost for
+      budgeting purposes, with overage costs only incurred when the included
+      allocation is exhausted.
+  - name: Schema Optimization
+    description: >
+      Choosing the Standard Schema plan versus the Premium Schema plan allows
+      operators to align data richness with actual use-case requirements,
+      avoiding unnecessary premium spend when base parcel attributes suffice.
+costOptimizationGuidance:
+  - Use the /usage endpoint to monitor consumption in real time and adjust
+    request patterns before hitting overage thresholds.
+  - Set the monthly maximum pricing cap in the account dashboard to hard-limit
+    spend exposure.
+  - Configure usage alerts to receive notifications as monthly allocation is consumed.
+  - Use the limit parameter to retrieve multiple records per request rather than
+    making many single-record requests, reducing request overhead.
+  - Choose Standard Schema if premium attributes (footprints, zoning, USPS flags)
+    are not required for the use case to minimize plan cost.
+  - Use the Account Usage endpoint (non-billable) for consumption monitoring
+    rather than inferring usage from response counts.
