@@ -7,5 +7,17 @@
       "last_checked": "2026-06-12",
       "notes": "No RSS/Atom feed discovered at standard paths (/rss, /feed, /blog/rss, /blog/feed). Blog is available at https://regrid.com/blog but does not expose a machine-readable feed."
     }
-  ]
+  ],
+  "repo": "regrid",
+  "feeds": [
+    {
+      "source": "https://app.regrid.com/api/plans",
+      "feed_url": "https://app.regrid.com/blog.rss",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-14T20:42:17Z"
 }
