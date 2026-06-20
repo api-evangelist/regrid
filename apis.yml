@@ -1,7 +1,7 @@
 aid: regrid
 name: Regrid
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/regrid/refs/heads/main/apis.yml
 created: 2026-06-12
 modified: 2026-06-12
@@ -36,7 +36,7 @@ apis:
       Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning,
       assessed values, and deed attributes. Supports up to 1,000 records per request
       with usage tracked by parcel records returned for billing purposes.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://regrid.com/parcel-api
     baseURL: https://app.regrid.com
     tags:
@@ -55,7 +55,7 @@ apis:
       Tile Map Service (TMS) providing interactive vector and raster map layers
       of the full Regrid parcel dataset for embedding in web and mobile mapping
       applications. Supports both Standard and Premium schema tile sets.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://regrid.com/api
     baseURL: https://app.regrid.com
     tags:
@@ -70,7 +70,7 @@ apis:
     description: >
       API delivering building footprint geometries matched to parcel records,
       including building square footage and building count per parcel.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://regrid.com/api
     baseURL: https://app.regrid.com
     tags:
@@ -84,7 +84,7 @@ apis:
     description: >
       API providing standardized zoning data and classifications covering major
       US metropolitan areas, matched to parcel records.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://regrid.com/api
     baseURL: https://app.regrid.com
     tags:
@@ -98,7 +98,7 @@ apis:
     description: >
       API providing current owner information and deeded property details with
       daily refresh cycles for up-to-date ownership tracking.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://regrid.com/api
     baseURL: https://app.regrid.com
     tags:
