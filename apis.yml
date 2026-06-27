@@ -135,11 +135,11 @@ common:
     url: json-schema/regrid-parcel-properties.json
   - type: JSONLDContext
     url: json-ld/regrid-context.jsonld
-  - type: Example
+  - type: Examples
     url: examples/parcel-point-lookup-response.json
-  - type: Example
+  - type: Examples
     url: examples/parcel-area-search-request.json
-  - type: Blogs
+  - type: Blog
     url: blogs/blogs.json
 maintainers:
   - FN: Kin Lane
