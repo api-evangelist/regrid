@@ -109,6 +109,10 @@ apis:
       - type: Documentation
         url: https://support.regrid.com/api/parcel-api-endpoints
 common:
+  - type: DomainSecurity
+    url: security/regrid-domain-security.yml
+  - type: Authentication
+    url: authentication/regrid-authentication.yml
   - type: Website
     url: https://regrid.com
   - type: Documentation

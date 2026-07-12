@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/regrid-parcel-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: apiToken
+  type: apiKey
+  in: query
+  parameter: token
+  description: API token obtained from your Regrid account profile
+  sources:
+  - openapi/regrid-parcel-openapi.yml
