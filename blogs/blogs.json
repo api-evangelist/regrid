@@ -2,11 +2,18 @@
   "repo": "regrid",
   "feeds": [
     {
-      "source": "https://regrid.com/blog",
+      "source": "https://regrid.com/blog/rss.xml",
       "feed_url": "https://regrid.com/blog/rss.xml",
       "title": "",
       "saved": 0,
-      "method": "discovered"
+      "method": "feed"
+    },
+    {
+      "source": "https://app.regrid.com/blog.rss",
+      "feed_url": "https://app.regrid.com/blog.rss",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     },
     {
       "source": "https://app.regrid.com/api/plans",
@@ -16,6 +23,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 10,
-  "fetched": "2026-06-27T12:03:07Z"
+  "post_count": 62,
+  "fetched": "2026-07-11T11:50:51Z"
 }
