@@ -1,0 +1,197 @@
+openapi: 3.0.3
+info:
+  title: Regrid Parcel Metadata Schemas API
+  description: 'RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
+
+    '
+  version: 2.0.0
+  termsOfService: https://regrid.com/terms
+  contact:
+    name: Regrid Support
+    url: https://support.regrid.com
+  license:
+    name: Proprietary
+    url: https://regrid.com/terms
+servers:
+- url: https://app.regrid.com
+  description: Regrid Production API
+security:
+- apiToken: []
+tags:
+- name: Schemas
+  description: Field schema definitions for parcel data products
+paths:
+  /schemas/parcel:
+    get:
+      operationId: getParcelSchema
+      summary: Parcel Schema
+      description: Returns the full US parcel dataset field schema with field names and descriptions
+      tags:
+      - Schemas
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Parcel schema definition object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaDefinition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /schemas/building:
+    get:
+      operationId: getBuildingSchema
+      summary: Building Footprint Schema
+      description: Returns field schema for building footprint data matched to parcels
+      tags:
+      - Schemas
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Building schema definition object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaDefinition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /schemas/address:
+    get:
+      operationId: getAddressSchema
+      summary: Secondary Address Schema
+      description: Returns field schema for matched secondary address records
+      tags:
+      - Schemas
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Address schema definition object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaDefinition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /schemas/enhanced_ownership:
+    get:
+      operationId: getEnhancedOwnershipSchema
+      summary: Enhanced Ownership Schema
+      description: Returns field schema for the enhanced ownership dataset
+      tags:
+      - Schemas
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Enhanced ownership schema definition object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaDefinition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /schemas/zoning:
+    get:
+      operationId: getZoningSchema
+      summary: Standardized Zoning Schema
+      description: Returns field schema for standardized zoning data
+      tags:
+      - Schemas
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Zoning schema definition object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaDefinition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /schemas/ca:
+    get:
+      operationId: getCanadaSchema
+      summary: Canada Parcel Schema
+      description: Returns the field schema for the Canadian parcel dataset
+      tags:
+      - Schemas
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Canada parcel schema definition object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaDefinition'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+  schemas:
+    SchemaDefinition:
+      type: object
+      description: Field schema definition for a Regrid data product
+      properties:
+        fields:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Field name/key
+              type:
+                type: string
+                description: Field data type
+              description:
+                type: string
+                description: Human-readable field description
+              indexed:
+                type: boolean
+                description: Whether the field is indexed for query filtering
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: API token obtained from your Regrid account profile
+externalDocs:
+  description: Regrid API Documentation
+  url: https://support.regrid.com/api/section/parcel-api

@@ -1,0 +1,383 @@
+openapi: 3.0.3
+info:
+  title: Regrid Parcel Metadata Parcel Query API
+  description: 'RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
+
+    '
+  version: 2.0.0
+  termsOfService: https://regrid.com/terms
+  contact:
+    name: Regrid Support
+    url: https://support.regrid.com
+  license:
+    name: Proprietary
+    url: https://regrid.com/terms
+servers:
+- url: https://app.regrid.com
+  description: Regrid Production API
+security:
+- apiToken: []
+tags:
+- name: Parcel Query
+  description: Filter parcel dataset by indexed schema attributes
+paths:
+  /api/v2/parcels/query:
+    get:
+      operationId: queryParcels
+      summary: Query by Field (GET)
+      description: 'Filter the entire nationwide parcel dataset by any indexed schema attributes. Described as the most powerful endpoint; supports combining field filters with optional geometry constraints.
+
+        '
+      tags:
+      - Parcel Query
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: query
+        in: query
+        required: true
+        description: 'Field filter expression. Use field:value syntax or structured JSON query. Supports 120+ indexed schema fields.
+
+          '
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 20
+      - name: offset
+        in: query
+        required: false
+        description: Record offset for pagination
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+      - name: fields
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful GeoJSON FeatureCollection response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelFeatureCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      operationId: postQueryParcels
+      summary: Query by Field (POST)
+      description: POST variant of query by field accepting structured JSON query body
+      tags:
+      - Parcel Query
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - query
+              properties:
+                query:
+                  type: object
+                  description: Structured field filter object
+                  additionalProperties: true
+                limit:
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                  default: 20
+                offset:
+                  type: integer
+                  minimum: 0
+                  default: 0
+                fields:
+                  type: string
+                geometry:
+                  $ref: '#/components/schemas/GeoJSONPolygon'
+      responses:
+        '200':
+          description: Successful GeoJSON FeatureCollection response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelFeatureCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    RateLimited:
+      description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              retry_after:
+                type: integer
+                description: Seconds to wait before retrying
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+  schemas:
+    GeoJSONPolygon:
+      type: object
+      description: GeoJSON Polygon geometry object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                type: number
+    ParcelProperties:
+      type: object
+      description: Parcel attribute properties in the standard schema
+      properties:
+        ll_uuid:
+          type: string
+          format: uuid
+          description: Regrid universal unique identifier for the parcel
+        ll_gisacre:
+          type: number
+          description: Parcel area in acres (GIS-calculated)
+        ll_bldg_count:
+          type: integer
+          description: Number of buildings on the parcel
+        ll_address:
+          type: string
+          description: Standardized parcel address
+        ll_addresstype:
+          type: string
+          description: Address type classification
+        ll_addr_unit:
+          type: string
+          description: Unit/suite/apt number for multi-unit parcels
+        parcelnumb:
+          type: string
+          description: Assessor Parcel Number (APN) as reported by the county
+        parcelnumb_no_formatting:
+          type: string
+          description: APN with formatting stripped
+        state_abbr:
+          type: string
+          description: Two-letter state abbreviation
+        county:
+          type: string
+          description: County name
+        city:
+          type: string
+          description: City name
+        cityname:
+          type: string
+          description: Formatted city name
+        state2:
+          type: string
+          description: State name (full)
+        saddno:
+          type: string
+          description: Street address number
+        saddpref:
+          type: string
+          description: Street direction prefix (N, S, E, W)
+        saddstr:
+          type: string
+          description: Street name
+        saddsttyp:
+          type: string
+          description: Street type (St, Ave, Blvd, etc.)
+        saddstsuf:
+          type: string
+          description: Street direction suffix
+        sunit:
+          type: string
+          description: Unit designator
+        szip:
+          type: string
+          description: ZIP code
+        szip4:
+          type: string
+          description: ZIP+4 extension
+        address:
+          type: string
+          description: Full site address string
+        scity:
+          type: string
+          description: Site city name
+        mail_address:
+          type: string
+          description: Owner mailing address
+        mail_city:
+          type: string
+          description: Owner mailing city
+        mail_state2:
+          type: string
+          description: Owner mailing state abbreviation
+        mail_zip:
+          type: string
+          description: Owner mailing ZIP code
+        mail_country:
+          type: string
+          description: Owner mailing country
+        owner:
+          type: string
+          description: Primary owner name
+        owner2:
+          type: string
+          description: Secondary owner name
+        owner3:
+          type: string
+          description: Tertiary owner name
+        owntype:
+          type: string
+          description: Owner type classification
+        zoning:
+          type: string
+          description: Zoning code as reported by the assessor
+        zoning_description:
+          type: string
+          description: Standardized zoning description
+        usecode:
+          type: string
+          description: Land use code
+        usedesc:
+          type: string
+          description: Land use description
+        structno:
+          type: integer
+          description: Number of structures on the parcel
+        yearbuilt:
+          type: integer
+          description: Year of primary structure construction
+        numstories:
+          type: number
+          description: Number of stories in the primary structure
+        numunits:
+          type: integer
+          description: Number of units in the building
+        acres:
+          type: number
+          description: Parcel area in acres (assessor-reported)
+        sqft:
+          type: number
+          description: Parcel area in square feet
+        ll_gissqft:
+          type: number
+          description: GIS-calculated parcel area in square feet
+        improvval:
+          type: number
+          description: Assessed improvement value
+        landval:
+          type: number
+          description: Assessed land value
+        parval:
+          type: number
+          description: Total assessed parcel value
+        saleprice:
+          type: number
+          description: Most recent sale price
+        saledate:
+          type: string
+          description: Most recent sale date
+        parvaltype:
+          type: string
+          description: Type of assessed value (market, appraised, etc.)
+        taxyear:
+          type: integer
+          description: Tax assessment year
+        ll_stable_id:
+          type: string
+          description: Regrid stable identifier that persists across data updates
+        path:
+          type: string
+          description: Regrid canonical path (e.g., us/ca/san-francisco/1234567890)
+        ll_updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of last Regrid data update
+    ParcelFeature:
+      type: object
+      description: GeoJSON Feature representing a single parcel record
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        id:
+          type: string
+          description: Regrid internal parcel ID
+        geometry:
+          $ref: '#/components/schemas/GeoJSONPolygon'
+        properties:
+          $ref: '#/components/schemas/ParcelProperties'
+    ParcelFeatureCollection:
+      type: object
+      description: GeoJSON FeatureCollection containing parcel records
+      properties:
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParcelFeature'
+        results:
+          type: integer
+          description: Total number of results returned
+        next:
+          type: string
+          nullable: true
+          description: URL for the next page of results (if paginated)
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: API token obtained from your Regrid account profile
+externalDocs:
+  description: Regrid API Documentation
+  url: https://support.regrid.com/api/section/parcel-api

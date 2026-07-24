@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: Regrid Parcel Metadata Typeahead API
+  description: 'RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
+
+    '
+  version: 2.0.0
+  termsOfService: https://regrid.com/terms
+  contact:
+    name: Regrid Support
+    url: https://support.regrid.com
+  license:
+    name: Proprietary
+    url: https://regrid.com/terms
+servers:
+- url: https://app.regrid.com
+  description: Regrid Production API
+security:
+- apiToken: []
+tags:
+- name: Typeahead
+  description: Address autocomplete suggestions
+paths:
+  /parcels/typeahead:
+    get:
+      operationId: getTypeahead
+      summary: Typeahead Address Suggestions
+      description: 'Provides real-time address autocomplete suggestions during user input. Returns a list of matching address strings for UI search components.
+
+        '
+      tags:
+      - Typeahead
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: query
+        in: query
+        required: true
+        description: Partial address string to autocomplete
+        schema:
+          type: string
+          example: 123 Main
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 20
+          default: 10
+      responses:
+        '200':
+          description: Array of address suggestion strings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  responses:
+    RateLimited:
+      description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              retry_after:
+                type: integer
+                description: Seconds to wait before retrying
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: API token obtained from your Regrid account profile
+externalDocs:
+  description: Regrid API Documentation
+  url: https://support.regrid.com/api/section/parcel-api

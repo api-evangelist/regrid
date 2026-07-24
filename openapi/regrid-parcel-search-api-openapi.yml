@@ -1,0 +1,734 @@
+openapi: 3.0.3
+info:
+  title: Regrid Parcel Metadata Parcel Search API
+  description: 'RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
+
+    '
+  version: 2.0.0
+  termsOfService: https://regrid.com/terms
+  contact:
+    name: Regrid Support
+    url: https://support.regrid.com
+  license:
+    name: Proprietary
+    url: https://regrid.com/terms
+servers:
+- url: https://app.regrid.com
+  description: Regrid Production API
+security:
+- apiToken: []
+tags:
+- name: Parcel Search
+  description: Search parcel records by various criteria
+paths:
+  /api/v2/parcels/point:
+    get:
+      operationId: getParcelsAtPoint
+      summary: Point Lookup
+      description: 'Returns parcel records at or near a given geographic coordinate. Accepts latitude/longitude and returns matching GeoJSON parcel features.
+
+        '
+      tags:
+      - Parcel Search
+      parameters:
+      - name: token
+        in: query
+        required: true
+        description: API authentication token
+        schema:
+          type: string
+      - name: lat
+        in: query
+        required: true
+        description: Latitude of the point to search
+        schema:
+          type: number
+          format: double
+          example: 37.7749
+      - name: lon
+        in: query
+        required: true
+        description: Longitude of the point to search
+        schema:
+          type: number
+          format: double
+          example: -122.4194
+      - name: radius
+        in: query
+        required: false
+        description: Optional search radius in meters around the point
+        schema:
+          type: number
+          format: double
+      - name: limit
+        in: query
+        required: false
+        description: Number of parcel records to return (1–1000)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 20
+      - name: fields
+        in: query
+        required: false
+        description: Comma-separated list of schema fields to include in response
+        schema:
+          type: string
+      - name: return_custom
+        in: query
+        required: false
+        description: Include custom fields in the response
+        schema:
+          type: boolean
+      - name: return_stacked
+        in: query
+        required: false
+        description: Return stacked/overlapping parcels at the point
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Successful GeoJSON FeatureCollection response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelFeatureCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      operationId: postParcelsAtPoint
+      summary: Point Lookup (POST)
+      description: POST variant of point lookup accepting JSON body
+      tags:
+      - Parcel Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - lat
+              - lon
+              properties:
+                lat:
+                  type: number
+                  format: double
+                lon:
+                  type: number
+                  format: double
+                radius:
+                  type: number
+                  format: double
+                limit:
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                  default: 20
+                fields:
+                  type: string
+      responses:
+        '200':
+          description: Successful GeoJSON FeatureCollection response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelFeatureCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /api/v2/parcels/address:
+    get:
+      operationId: getParcelsByAddress
+      summary: Address Lookup
+      description: 'Locates parcel records matching a street address in the US and Puerto Rico. Returns GeoJSON parcel features for matching addresses.
+
+        '
+      tags:
+      - Parcel Search
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: query
+        in: query
+        required: true
+        description: Street address string to search
+        schema:
+          type: string
+          example: 123 Main St, San Francisco, CA 94105
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 20
+      - name: fields
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful GeoJSON FeatureCollection response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelFeatureCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /api/v2/parcels/apn:
+    get:
+      operationId: getParcelsByAPN
+      summary: APN Lookup
+      description: 'Retrieves parcel records by Assessor Parcel Number (APN). Requires specifying the state and/or county along with the APN string.
+
+        '
+      tags:
+      - Parcel Search
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: apn
+        in: query
+        required: true
+        description: Assessor Parcel Number identifier
+        schema:
+          type: string
+          example: 1234-567-890
+      - name: state_code
+        in: query
+        required: false
+        description: Two-letter US state code to narrow the search
+        schema:
+          type: string
+          example: CA
+      - name: county
+        in: query
+        required: false
+        description: County name to narrow the search
+        schema:
+          type: string
+          example: San Francisco
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 20
+      - name: fields
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful GeoJSON FeatureCollection response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelFeatureCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /api/v2/parcels/owner:
+    get:
+      operationId: getParcelsByOwner
+      summary: Owner Name Lookup
+      description: 'Finds all properties associated with a specific owner name. Returns GeoJSON parcel features for all parcels matching the owner query.
+
+        '
+      tags:
+      - Parcel Search
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: owner
+        in: query
+        required: true
+        description: Owner name string to search
+        schema:
+          type: string
+          example: Smith John
+      - name: state_code
+        in: query
+        required: false
+        description: Two-letter US state code to narrow the search
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 20
+      - name: fields
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful GeoJSON FeatureCollection response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelFeatureCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /api/v2/parcels/area:
+    get:
+      operationId: getParcelsByArea
+      summary: Area Geometry Search (GET)
+      description: 'Returns all parcels that fall within a specified geographic area defined by a GeoJSON polygon or bounding box.
+
+        '
+      tags:
+      - Parcel Search
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: bbox
+        in: query
+        required: false
+        description: Bounding box as comma-separated min_lon,min_lat,max_lon,max_lat
+        schema:
+          type: string
+          example: -122.45,37.75,-122.40,37.79
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000
+          default: 20
+      - name: fields
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful GeoJSON FeatureCollection response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelFeatureCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+    post:
+      operationId: postParcelsByArea
+      summary: Area Geometry Search (POST)
+      description: 'POST variant of area search accepting a GeoJSON polygon geometry in the request body.
+
+        '
+      tags:
+      - Parcel Search
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                geometry:
+                  $ref: '#/components/schemas/GeoJSONPolygon'
+                limit:
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                  default: 20
+                fields:
+                  type: string
+      responses:
+        '200':
+          description: Successful GeoJSON FeatureCollection response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelFeatureCollection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /parcels/path:
+    get:
+      operationId: getParcelByPath
+      summary: Parcel Path Lookup
+      description: Returns a parcel record using Regrid's canonical path format
+      tags:
+      - Parcel Search
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: path
+        in: query
+        required: true
+        description: Regrid canonical path string (e.g., us/ca/san-francisco/1234567890)
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Parcel GeoJSON Feature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelFeature'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /parcels/{ll_uuid}:
+    get:
+      operationId: getParcelByUUID
+      summary: Parcel UUID Lookup
+      description: Retrieves a parcel record by Regrid's internal UUID identifier
+      tags:
+      - Parcel Search
+      parameters:
+      - name: ll_uuid
+        in: path
+        required: true
+        description: Regrid UUID for the parcel
+        schema:
+          type: string
+          format: uuid
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: fields
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Parcel GeoJSON Feature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParcelFeature'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    RateLimited:
+      description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              retry_after:
+                type: integer
+                description: Seconds to wait before retrying
+    NotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+  schemas:
+    GeoJSONPolygon:
+      type: object
+      description: GeoJSON Polygon geometry object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                type: number
+    ParcelProperties:
+      type: object
+      description: Parcel attribute properties in the standard schema
+      properties:
+        ll_uuid:
+          type: string
+          format: uuid
+          description: Regrid universal unique identifier for the parcel
+        ll_gisacre:
+          type: number
+          description: Parcel area in acres (GIS-calculated)
+        ll_bldg_count:
+          type: integer
+          description: Number of buildings on the parcel
+        ll_address:
+          type: string
+          description: Standardized parcel address
+        ll_addresstype:
+          type: string
+          description: Address type classification
+        ll_addr_unit:
+          type: string
+          description: Unit/suite/apt number for multi-unit parcels
+        parcelnumb:
+          type: string
+          description: Assessor Parcel Number (APN) as reported by the county
+        parcelnumb_no_formatting:
+          type: string
+          description: APN with formatting stripped
+        state_abbr:
+          type: string
+          description: Two-letter state abbreviation
+        county:
+          type: string
+          description: County name
+        city:
+          type: string
+          description: City name
+        cityname:
+          type: string
+          description: Formatted city name
+        state2:
+          type: string
+          description: State name (full)
+        saddno:
+          type: string
+          description: Street address number
+        saddpref:
+          type: string
+          description: Street direction prefix (N, S, E, W)
+        saddstr:
+          type: string
+          description: Street name
+        saddsttyp:
+          type: string
+          description: Street type (St, Ave, Blvd, etc.)
+        saddstsuf:
+          type: string
+          description: Street direction suffix
+        sunit:
+          type: string
+          description: Unit designator
+        szip:
+          type: string
+          description: ZIP code
+        szip4:
+          type: string
+          description: ZIP+4 extension
+        address:
+          type: string
+          description: Full site address string
+        scity:
+          type: string
+          description: Site city name
+        mail_address:
+          type: string
+          description: Owner mailing address
+        mail_city:
+          type: string
+          description: Owner mailing city
+        mail_state2:
+          type: string
+          description: Owner mailing state abbreviation
+        mail_zip:
+          type: string
+          description: Owner mailing ZIP code
+        mail_country:
+          type: string
+          description: Owner mailing country
+        owner:
+          type: string
+          description: Primary owner name
+        owner2:
+          type: string
+          description: Secondary owner name
+        owner3:
+          type: string
+          description: Tertiary owner name
+        owntype:
+          type: string
+          description: Owner type classification
+        zoning:
+          type: string
+          description: Zoning code as reported by the assessor
+        zoning_description:
+          type: string
+          description: Standardized zoning description
+        usecode:
+          type: string
+          description: Land use code
+        usedesc:
+          type: string
+          description: Land use description
+        structno:
+          type: integer
+          description: Number of structures on the parcel
+        yearbuilt:
+          type: integer
+          description: Year of primary structure construction
+        numstories:
+          type: number
+          description: Number of stories in the primary structure
+        numunits:
+          type: integer
+          description: Number of units in the building
+        acres:
+          type: number
+          description: Parcel area in acres (assessor-reported)
+        sqft:
+          type: number
+          description: Parcel area in square feet
+        ll_gissqft:
+          type: number
+          description: GIS-calculated parcel area in square feet
+        improvval:
+          type: number
+          description: Assessed improvement value
+        landval:
+          type: number
+          description: Assessed land value
+        parval:
+          type: number
+          description: Total assessed parcel value
+        saleprice:
+          type: number
+          description: Most recent sale price
+        saledate:
+          type: string
+          description: Most recent sale date
+        parvaltype:
+          type: string
+          description: Type of assessed value (market, appraised, etc.)
+        taxyear:
+          type: integer
+          description: Tax assessment year
+        ll_stable_id:
+          type: string
+          description: Regrid stable identifier that persists across data updates
+        path:
+          type: string
+          description: Regrid canonical path (e.g., us/ca/san-francisco/1234567890)
+        ll_updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of last Regrid data update
+    ParcelFeature:
+      type: object
+      description: GeoJSON Feature representing a single parcel record
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        id:
+          type: string
+          description: Regrid internal parcel ID
+        geometry:
+          $ref: '#/components/schemas/GeoJSONPolygon'
+        properties:
+          $ref: '#/components/schemas/ParcelProperties'
+    ParcelFeatureCollection:
+      type: object
+      description: GeoJSON FeatureCollection containing parcel records
+      properties:
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParcelFeature'
+        results:
+          type: integer
+          description: Total number of results returned
+        next:
+          type: string
+          nullable: true
+          description: URL for the next page of results (if paginated)
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      in: query
+      name: token
+      description: API token obtained from your Regrid account profile
+externalDocs:
+  description: Regrid API Documentation
+  url: https://support.regrid.com/api/section/parcel-api
