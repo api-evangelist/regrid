@@ -1,7 +1,20 @@
 aid: regrid
 name: Regrid
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/regrid.png
 url: https://raw.githubusercontent.com/api-evangelist/regrid/refs/heads/main/apis.yml
 created: 2026-06-12
 modified: 2026-06-12
@@ -29,85 +42,124 @@ tags:
   - Mapping
   - Tiles
 apis:
-  - name: Regrid Parcel API
-    description: >
-      RESTful API for querying US and Canadian parcel records by location (lat/lon),
-      street address, assessor parcel number (APN), owner name, or polygon area.
-      Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning,
-      assessed values, and deed attributes. Supports up to 1,000 records per request
-      with usage tracked by parcel records returned for billing purposes.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://regrid.com/parcel-api
-    baseURL: https://app.regrid.com
-    tags:
-      - Parcels
-      - Land Data
-      - Property Data
-      - GeoJSON
-      - Real Estate
-    properties:
-      - type: Documentation
-        url: https://support.regrid.com/api/using-the-parcel-api
-      - type: OpenAPI
-        url: openapi/regrid-parcel-openapi.yml
-  - name: Regrid Tile API
-    description: >
-      Tile Map Service (TMS) providing interactive vector and raster map layers
-      of the full Regrid parcel dataset for embedding in web and mobile mapping
-      applications. Supports both Standard and Premium schema tile sets.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://regrid.com/api
-    baseURL: https://app.regrid.com
-    tags:
-      - Tiles
-      - Mapping
-      - Geospatial
-      - TMS
-    properties:
-      - type: Documentation
-        url: https://support.regrid.com/api/section/parcel-api
-  - name: Regrid Matched Building Footprints API
-    description: >
-      API delivering building footprint geometries matched to parcel records,
-      including building square footage and building count per parcel.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://regrid.com/api
-    baseURL: https://app.regrid.com
-    tags:
-      - Buildings
-      - Footprints
-      - Geospatial
-    properties:
-      - type: Documentation
-        url: https://support.regrid.com/api/parcel-api-endpoints
-  - name: Regrid Standardized Zoning API
-    description: >
-      API providing standardized zoning data and classifications covering major
-      US metropolitan areas, matched to parcel records.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://regrid.com/api
-    baseURL: https://app.regrid.com
-    tags:
-      - Zoning
-      - Land Use
-      - Geospatial
-    properties:
-      - type: Documentation
-        url: https://support.regrid.com/api/parcel-api-endpoints
-  - name: Regrid Daily Ownership Updates API
-    description: >
-      API providing current owner information and deeded property details with
-      daily refresh cycles for up-to-date ownership tracking.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://regrid.com/api
-    baseURL: https://app.regrid.com
-    tags:
-      - Ownership
-      - Deeds
-      - Real Estate
-    properties:
-      - type: Documentation
-        url: https://support.regrid.com/api/parcel-api-endpoints
+- name: Regrid Tile API
+  description: >
+    Tile Map Service (TMS) providing interactive vector and raster map layers of the full Regrid parcel
+    dataset for embedding in web and mobile mapping applications. Supports both Standard and Premium schema
+    tile sets.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://regrid.com/api
+  baseURL: https://app.regrid.com
+  tags:
+  - Tiles
+  - Mapping
+  - Geospatial
+  - TMS
+  properties:
+  - type: Documentation
+    url: https://support.regrid.com/api/section/parcel-api
+- name: Regrid Matched Building Footprints API
+  description: >
+    API delivering building footprint geometries matched to parcel records, including building square
+    footage and building count per parcel.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://regrid.com/api
+  baseURL: https://app.regrid.com
+  tags:
+  - Buildings
+  - Footprints
+  - Geospatial
+  properties:
+  - type: Documentation
+    url: https://support.regrid.com/api/parcel-api-endpoints
+- name: Regrid Standardized Zoning API
+  description: >
+    API providing standardized zoning data and classifications covering major US metropolitan areas, matched
+    to parcel records.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://regrid.com/api
+  baseURL: https://app.regrid.com
+  tags:
+  - Zoning
+  - Land Use
+  - Geospatial
+  properties:
+  - type: Documentation
+    url: https://support.regrid.com/api/parcel-api-endpoints
+- name: Regrid Daily Ownership Updates API
+  description: >
+    API providing current owner information and deeded property details with daily refresh cycles for
+    up-to-date ownership tracking.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://regrid.com/api
+  baseURL: https://app.regrid.com
+  tags:
+  - Ownership
+  - Deeds
+  - Real Estate
+  properties:
+  - type: Documentation
+    url: https://support.regrid.com/api/parcel-api-endpoints
+- aid: regrid:regrid-metadata-api
+  name: Regrid Metadata API
+  description: Coverage, usage, and data quality endpoints
+  humanURL: https://regrid.com/parcel-api
+  baseURL: https://app.regrid.com
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/regrid-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://support.regrid.com/api/using-the-parcel-api
+- aid: regrid:regrid-parcel-query-api
+  name: Regrid Parcel Query API
+  description: Filter parcel dataset by indexed schema attributes
+  humanURL: https://regrid.com/parcel-api
+  baseURL: https://app.regrid.com
+  tags:
+  - Parcel Query
+  properties:
+  - type: OpenAPI
+    url: openapi/regrid-parcel-query-api-openapi.yml
+  - type: Documentation
+    url: https://support.regrid.com/api/using-the-parcel-api
+- aid: regrid:regrid-parcel-search-api
+  name: Regrid Parcel Search API
+  description: Search parcel records by various criteria
+  humanURL: https://regrid.com/parcel-api
+  baseURL: https://app.regrid.com
+  tags:
+  - Parcel Search
+  properties:
+  - type: OpenAPI
+    url: openapi/regrid-parcel-search-api-openapi.yml
+  - type: Documentation
+    url: https://support.regrid.com/api/using-the-parcel-api
+- aid: regrid:regrid-schemas-api
+  name: Regrid Schemas API
+  description: Field schema definitions for parcel data products
+  humanURL: https://regrid.com/parcel-api
+  baseURL: https://app.regrid.com
+  tags:
+  - Schemas
+  properties:
+  - type: OpenAPI
+    url: openapi/regrid-schemas-api-openapi.yml
+  - type: Documentation
+    url: https://support.regrid.com/api/using-the-parcel-api
+- aid: regrid:regrid-typeahead-api
+  name: Regrid Typeahead API
+  description: Address autocomplete suggestions
+  humanURL: https://regrid.com/parcel-api
+  baseURL: https://app.regrid.com
+  tags:
+  - Typeahead
+  properties:
+  - type: OpenAPI
+    url: openapi/regrid-typeahead-api-openapi.yml
+  - type: Documentation
+    url: https://support.regrid.com/api/using-the-parcel-api
 common:
   - type: AgenticAccess
     url: agentic-access/regrid-agentic-access.yml
