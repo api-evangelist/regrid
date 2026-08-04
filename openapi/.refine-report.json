@@ -1,0 +1,22 @@
+{
+  "provider": "regrid",
+  "sources": [
+    "regrid-metadata-api-openapi.yml",
+    "regrid-parcel-query-api-openapi.yml",
+    "regrid-parcel-search-api-openapi.yml",
+    "regrid-schemas-api-openapi.yml",
+    "regrid-typeahead-api-openapi.yml"
+  ],
+  "outputs": [
+    "regrid-metadata-api-openapi.yml",
+    "regrid-parcel-query-api-openapi.yml",
+    "regrid-parcel-search-api-openapi.yml",
+    "regrid-schemas-api-openapi.yml",
+    "regrid-typeahead-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
