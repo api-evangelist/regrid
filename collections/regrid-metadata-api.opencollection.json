@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Regrid Parcel Metadata API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "County Coverage Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/verse",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns county-level metadata including coverage status, field availability, and data refresh dates for all covered US counties and Canadian provinces.\n"
+        },
+        {
+          "info": {
+            "name": "API Usage Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/usage",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns current API usage summary against plan limits"
+        },
+        {
+          "info": {
+            "name": "Detailed API Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/usage/detailed",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date for usage range (YYYY-MM-DD)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date for usage range (YYYY-MM-DD)"
+              }
+            ]
+          },
+          "docs": "Returns granular usage breakdown by endpoint and date"
+        },
+        {
+          "info": {
+            "name": "Submit Data Quality Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.regrid.com/report",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a data quality report for a specific parcel"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

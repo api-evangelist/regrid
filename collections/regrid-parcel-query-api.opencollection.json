@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Regrid Parcel Metadata Parcel Query API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Parcel Query",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query by Field (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/api/v2/parcels/query",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Field filter expression. Use field:value syntax or structured JSON query. Supports 120+ indexed schema fields.\n"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Record offset for pagination"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Filter the entire nationwide parcel dataset by any indexed schema attributes. Described as the most powerful endpoint; supports combining field filters with optional geometry constraints.\n"
+        },
+        {
+          "info": {
+            "name": "Query by Field (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.regrid.com/api/v2/parcels/query",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "POST variant of query by field accepting structured JSON query body"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

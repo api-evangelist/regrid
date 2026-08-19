@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Regrid Parcel Metadata Schemas API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schemas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Parcel Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/schemas/parcel",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the full US parcel dataset field schema with field names and descriptions"
+        },
+        {
+          "info": {
+            "name": "Building Footprint Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/schemas/building",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns field schema for building footprint data matched to parcels"
+        },
+        {
+          "info": {
+            "name": "Secondary Address Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/schemas/address",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns field schema for matched secondary address records"
+        },
+        {
+          "info": {
+            "name": "Enhanced Ownership Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/schemas/enhanced_ownership",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns field schema for the enhanced ownership dataset"
+        },
+        {
+          "info": {
+            "name": "Standardized Zoning Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/schemas/zoning",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns field schema for standardized zoning data"
+        },
+        {
+          "info": {
+            "name": "Canada Parcel Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/schemas/ca",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the field schema for the Canadian parcel dataset"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

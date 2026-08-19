@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Regrid Parcel Metadata Typeahead API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Typeahead",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Typeahead Address Suggestions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/parcels/typeahead",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Partial address string to autocomplete"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Provides real-time address autocomplete suggestions during user input. Returns a list of matching address strings for UI search components.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,623 @@
+{
+  "item": [
+    {
+      "id": "e6f31e83-e44e-438c-9e07-4c99118253d8",
+      "name": "Parcel Query",
+      "description": {
+        "content": "Filter parcel dataset by indexed schema attributes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6e0cefb6-2192-4860-b553-1af0764c3f9b",
+          "name": "Query by Field (GET)",
+          "request": {
+            "name": "Query by Field (GET)",
+            "description": {
+              "content": "Filter the entire nationwide parcel dataset by any indexed schema attributes. Described as the most powerful endpoint; supports combining field filters with optional geometry constraints.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "parcels",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) Field filter expression. Use field:value syntax or structured JSON query. Supports 120+ indexed schema fields.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Record offset for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3abf965-3efd-4264-8a00-cb109eb23b24",
+              "name": "Successful GeoJSON FeatureCollection response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "parcels",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"id\": \"string\",\n      \"geometry\": {\n        \"type\": \"MultiPolygon\",\n        \"coordinates\": [\n          [\n            [\n              2819.9622744366816,\n              1298.1753715525201\n            ],\n            [\n              7542.109975378958,\n              6186.309577951072\n            ]\n          ],\n          [\n            [\n              8733.290314685793,\n              6306.059112908731\n            ],\n            [\n              4432.495207480685,\n              2671.782826661021\n            ]\n          ]\n        ]\n      },\n      \"properties\": {\n        \"ll_uuid\": \"23d28600-839a-c2ea-313e-b64fc3196c2b\",\n        \"ll_gisacre\": 8525.603590063229,\n        \"ll_bldg_count\": 1106,\n        \"ll_address\": \"string\",\n        \"ll_addresstype\": \"string\",\n        \"ll_addr_unit\": \"string\",\n        \"parcelnumb\": \"string\",\n        \"parcelnumb_no_formatting\": \"string\",\n        \"state_abbr\": \"string\",\n        \"county\": \"string\",\n        \"city\": \"string\",\n        \"cityname\": \"string\",\n        \"state2\": \"string\",\n        \"saddno\": \"string\",\n        \"saddpref\": \"string\",\n        \"saddstr\": \"string\",\n        \"saddsttyp\": \"string\",\n        \"saddstsuf\": \"string\",\n        \"sunit\": \"string\",\n        \"szip\": \"string\",\n        \"szip4\": \"string\",\n        \"address\": \"string\",\n        \"scity\": \"string\",\n        \"mail_address\": \"string\",\n        \"mail_city\": \"string\",\n        \"mail_state2\": \"string\",\n        \"mail_zip\": \"string\",\n        \"mail_country\": \"string\",\n        \"owner\": \"string\",\n        \"owner2\": \"string\",\n        \"owner3\": \"string\",\n        \"owntype\": \"string\",\n        \"zoning\": \"string\",\n        \"zoning_description\": \"string\",\n        \"usecode\": \"string\",\n        \"usedesc\": \"string\",\n        \"structno\": 2733,\n        \"yearbuilt\": 463,\n        \"numstories\": 1997.3529203576602,\n        \"numunits\": 6301,\n        \"acres\": 5719.617124201851,\n        \"sqft\": 6398.499724100517,\n        \"ll_gissqft\": 1866.8893413430433,\n        \"improvval\": 1618.6482647201117,\n        \"landval\": 241.30915722454515,\n        \"parval\": 4534.910571465667,\n        \"saleprice\": 4137.6693943563705,\n        \"saledate\": \"string\",\n        \"parvaltype\": \"string\",\n        \"taxyear\": 8277,\n        \"ll_stable_id\": \"string\",\n        \"path\": \"string\",\n        \"ll_updated_at\": \"1948-04-25T13:39:28.743Z\"\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"id\": \"string\",\n      \"geometry\": {\n        \"type\": \"MultiPolygon\",\n        \"coordinates\": [\n          [\n            [\n              3774.259303569397,\n              4284.244347303633\n            ],\n            [\n              9834.540776788968,\n              1831.6417425661514\n            ]\n          ],\n          [\n            [\n              304.5448401918438,\n              7716.956091961884\n            ],\n            [\n              1000.5066855538025,\n              3517.287481862644\n            ]\n          ]\n        ]\n      },\n      \"properties\": {\n        \"ll_uuid\": \"6894b62c-18b8-9d38-f2f7-cc26a2ff09f9\",\n        \"ll_gisacre\": 9168.027853083664,\n        \"ll_bldg_count\": 5797,\n        \"ll_address\": \"string\",\n        \"ll_addresstype\": \"string\",\n        \"ll_addr_unit\": \"string\",\n        \"parcelnumb\": \"string\",\n        \"parcelnumb_no_formatting\": \"string\",\n        \"state_abbr\": \"string\",\n        \"county\": \"string\",\n        \"city\": \"string\",\n        \"cityname\": \"string\",\n        \"state2\": \"string\",\n        \"saddno\": \"string\",\n        \"saddpref\": \"string\",\n        \"saddstr\": \"string\",\n        \"saddsttyp\": \"string\",\n        \"saddstsuf\": \"string\",\n        \"sunit\": \"string\",\n        \"szip\": \"string\",\n        \"szip4\": \"string\",\n        \"address\": \"string\",\n        \"scity\": \"string\",\n        \"mail_address\": \"string\",\n        \"mail_city\": \"string\",\n        \"mail_state2\": \"string\",\n        \"mail_zip\": \"string\",\n        \"mail_country\": \"string\",\n        \"owner\": \"string\",\n        \"owner2\": \"string\",\n        \"owner3\": \"string\",\n        \"owntype\": \"string\",\n        \"zoning\": \"string\",\n        \"zoning_description\": \"string\",\n        \"usecode\": \"string\",\n        \"usedesc\": \"string\",\n        \"structno\": 5316,\n        \"yearbuilt\": 6335,\n        \"numstories\": 9902.098759104329,\n        \"numunits\": 491,\n        \"acres\": 295.3835835415042,\n        \"sqft\": 3840.347724834955,\n        \"ll_gissqft\": 1865.7714725275464,\n        \"improvval\": 2982.1757198103437,\n        \"landval\": 3338.1464811608885,\n        \"parval\": 6456.3765644251125,\n        \"saleprice\": 6983.955057240071,\n        \"saledate\": \"string\",\n        \"parvaltype\": \"string\",\n        \"taxyear\": 8786,\n        \"ll_stable_id\": \"string\",\n        \"path\": \"string\",\n        \"ll_updated_at\": \"2026-02-20T09:29:08.093Z\"\n      }\n    }\n  ],\n  \"results\": 3562,\n  \"next\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00113c9c-c7c9-4f3d-9c18-70e7ad38b1fe",
+              "name": "Bad request — invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "parcels",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c54c6001-b7cb-4d48-8005-697735e14602",
+              "name": "Unauthorized — invalid or missing API token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "parcels",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae64d638-87f8-4948-a9fe-11aae7ffd4b1",
+              "name": "Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "parcels",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"retry_after\": 3964\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "021a4c74-74fe-49b5-91a8-221054a16c09",
+          "name": "Query by Field (POST)",
+          "request": {
+            "name": "Query by Field (POST)",
+            "description": {
+              "content": "POST variant of query by field accepting structured JSON query body",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "parcels",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": {\n    \"key_0\": \"string\"\n  },\n  \"limit\": 20,\n  \"offset\": 0,\n  \"fields\": \"<string>\",\n  \"geometry\": {\n    \"type\": \"<string>\",\n    \"coordinates\": [\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dca1df97-f6f4-4a85-a650-b858a247ef16",
+              "name": "Successful GeoJSON FeatureCollection response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "parcels",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"key_0\": 6030.063612257145,\n    \"key_1\": \"string\"\n  },\n  \"limit\": 20,\n  \"offset\": 0,\n  \"fields\": \"<string>\",\n  \"geometry\": {\n    \"type\": \"<string>\",\n    \"coordinates\": [\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"id\": \"string\",\n      \"geometry\": {\n        \"type\": \"<string>\",\n        \"coordinates\": [\n          [\n            [\n              \"<number>\",\n              \"<number>\"\n            ],\n            [\n              \"<number>\",\n              \"<number>\"\n            ]\n          ],\n          [\n            [\n              \"<number>\",\n              \"<number>\"\n            ],\n            [\n              \"<number>\",\n              \"<number>\"\n            ]\n          ]\n        ]\n      },\n      \"properties\": {\n        \"ll_uuid\": \"003289d0-6f3f-50b2-a989-d1616870d763\",\n        \"ll_gisacre\": 1180.3683354704754,\n        \"ll_bldg_count\": 2440,\n        \"ll_address\": \"string\",\n        \"ll_addresstype\": \"string\",\n        \"ll_addr_unit\": \"string\",\n        \"parcelnumb\": \"string\",\n        \"parcelnumb_no_formatting\": \"string\",\n        \"state_abbr\": \"string\",\n        \"county\": \"string\",\n        \"city\": \"string\",\n        \"cityname\": \"string\",\n        \"state2\": \"string\",\n        \"saddno\": \"string\",\n        \"saddpref\": \"string\",\n        \"saddstr\": \"string\",\n        \"saddsttyp\": \"string\",\n        \"saddstsuf\": \"string\",\n        \"sunit\": \"string\",\n        \"szip\": \"string\",\n        \"szip4\": \"string\",\n        \"address\": \"string\",\n        \"scity\": \"string\",\n        \"mail_address\": \"string\",\n        \"mail_city\": \"string\",\n        \"mail_state2\": \"string\",\n        \"mail_zip\": \"string\",\n        \"mail_country\": \"string\",\n        \"owner\": \"string\",\n        \"owner2\": \"string\",\n        \"owner3\": \"string\",\n        \"owntype\": \"string\",\n        \"zoning\": \"string\",\n        \"zoning_description\": \"string\",\n        \"usecode\": \"string\",\n        \"usedesc\": \"string\",\n        \"structno\": 9134,\n        \"yearbuilt\": 2982,\n        \"numstories\": 9509.693812838063,\n        \"numunits\": 2368,\n        \"acres\": 3363.1652734738905,\n        \"sqft\": 4783.650643014548,\n        \"ll_gissqft\": 926.7992152664762,\n        \"improvval\": 4461.0373109908305,\n        \"landval\": 9976.083813163004,\n        \"parval\": 683.3649665929298,\n        \"saleprice\": 7722.275205576419,\n        \"saledate\": \"string\",\n        \"parvaltype\": \"string\",\n        \"taxyear\": 2587,\n        \"ll_stable_id\": \"string\",\n        \"path\": \"string\",\n        \"ll_updated_at\": \"1966-02-21T01:11:40.759Z\"\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"id\": \"string\",\n      \"geometry\": {\n        \"type\": \"<string>\",\n        \"coordinates\": [\n          [\n            [\n              \"<number>\",\n              \"<number>\"\n            ],\n            [\n              \"<number>\",\n              \"<number>\"\n            ]\n          ],\n          [\n            [\n              \"<number>\",\n              \"<number>\"\n            ],\n            [\n              \"<number>\",\n              \"<number>\"\n            ]\n          ]\n        ]\n      },\n      \"properties\": {\n        \"ll_uuid\": \"74d77987-d1b3-2251-02eb-36223aa4ff4f\",\n        \"ll_gisacre\": 7187.093975539077,\n        \"ll_bldg_count\": 4766,\n        \"ll_address\": \"string\",\n        \"ll_addresstype\": \"string\",\n        \"ll_addr_unit\": \"string\",\n        \"parcelnumb\": \"string\",\n        \"parcelnumb_no_formatting\": \"string\",\n        \"state_abbr\": \"string\",\n        \"county\": \"string\",\n        \"city\": \"string\",\n        \"cityname\": \"string\",\n        \"state2\": \"string\",\n        \"saddno\": \"string\",\n        \"saddpref\": \"string\",\n        \"saddstr\": \"string\",\n        \"saddsttyp\": \"string\",\n        \"saddstsuf\": \"string\",\n        \"sunit\": \"string\",\n        \"szip\": \"string\",\n        \"szip4\": \"string\",\n        \"address\": \"string\",\n        \"scity\": \"string\",\n        \"mail_address\": \"string\",\n        \"mail_city\": \"string\",\n        \"mail_state2\": \"string\",\n        \"mail_zip\": \"string\",\n        \"mail_country\": \"string\",\n        \"owner\": \"string\",\n        \"owner2\": \"string\",\n        \"owner3\": \"string\",\n        \"owntype\": \"string\",\n        \"zoning\": \"string\",\n        \"zoning_description\": \"string\",\n        \"usecode\": \"string\",\n        \"usedesc\": \"string\",\n        \"structno\": 8701,\n        \"yearbuilt\": 6019,\n        \"numstories\": 1247.911253116587,\n        \"numunits\": 1977,\n        \"acres\": 6158.6993286397665,\n        \"sqft\": 4218.014098249601,\n        \"ll_gissqft\": 6149.738968033332,\n        \"improvval\": 2508.575593159047,\n        \"landval\": 4146.966596902898,\n        \"parval\": 4421.59719840064,\n        \"saleprice\": 2217.6754009183974,\n        \"saledate\": \"string\",\n        \"parvaltype\": \"string\",\n        \"taxyear\": 9205,\n        \"ll_stable_id\": \"string\",\n        \"path\": \"string\",\n        \"ll_updated_at\": \"1953-06-22T09:33:09.975Z\"\n      }\n    }\n  ],\n  \"results\": 3072,\n  \"next\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba7189a5-5bc7-4f33-befa-51f7640f2b67",
+              "name": "Bad request — invalid parameters or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "parcels",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"key_0\": 6030.063612257145,\n    \"key_1\": \"string\"\n  },\n  \"limit\": 20,\n  \"offset\": 0,\n  \"fields\": \"<string>\",\n  \"geometry\": {\n    \"type\": \"<string>\",\n    \"coordinates\": [\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29d44f8b-c97e-4b90-b6ac-a405eef3b078",
+              "name": "Unauthorized — invalid or missing API token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "parcels",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"key_0\": 6030.063612257145,\n    \"key_1\": \"string\"\n  },\n  \"limit\": 20,\n  \"offset\": 0,\n  \"fields\": \"<string>\",\n  \"geometry\": {\n    \"type\": \"<string>\",\n    \"coordinates\": [\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f4fbcba-4a05-41d8-a51f-531e29ae7409",
+              "name": "Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "parcels",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": {\n    \"key_0\": 6030.063612257145,\n    \"key_1\": \"string\"\n  },\n  \"limit\": 20,\n  \"offset\": 0,\n  \"fields\": \"<string>\",\n  \"geometry\": {\n    \"type\": \"<string>\",\n    \"coordinates\": [\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ],\n      [\n        [\n          \"<number>\",\n          \"<number>\"\n        ],\n        [\n          \"<number>\",\n          \"<number>\"\n        ]\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"retry_after\": 3964\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.regrid.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "674e9c75-984b-4a31-8a0c-e06aa742ac49",
+    "name": "Regrid Parcel Metadata Parcel Query API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.\n\n\nContact Support:\n Name: Regrid Support",
+      "type": "text/plain"
+    }
+  }
+}

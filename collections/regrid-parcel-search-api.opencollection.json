@@ -1,0 +1,329 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Regrid Parcel Metadata Parcel Search API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "token",
+      "value": "{{token}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Parcel Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Point Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/api/v2/parcels/point",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "API authentication token"
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the point to search"
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the point to search"
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Optional search radius in meters around the point"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of parcel records to return (1–1000)"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of schema fields to include in response"
+              },
+              {
+                "name": "return_custom",
+                "value": "",
+                "type": "query",
+                "description": "Include custom fields in the response"
+              },
+              {
+                "name": "return_stacked",
+                "value": "",
+                "type": "query",
+                "description": "Return stacked/overlapping parcels at the point"
+              }
+            ]
+          },
+          "docs": "Returns parcel records at or near a given geographic coordinate. Accepts latitude/longitude and returns matching GeoJSON parcel features.\n"
+        },
+        {
+          "info": {
+            "name": "Point Lookup (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.regrid.com/api/v2/parcels/point",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "POST variant of point lookup accepting JSON body"
+        },
+        {
+          "info": {
+            "name": "Address Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/api/v2/parcels/address",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Street address string to search"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Locates parcel records matching a street address in the US and Puerto Rico. Returns GeoJSON parcel features for matching addresses.\n"
+        },
+        {
+          "info": {
+            "name": "APN Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/api/v2/parcels/apn",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "apn",
+                "value": "",
+                "type": "query",
+                "description": "Assessor Parcel Number identifier"
+              },
+              {
+                "name": "state_code",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter US state code to narrow the search"
+              },
+              {
+                "name": "county",
+                "value": "",
+                "type": "query",
+                "description": "County name to narrow the search"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves parcel records by Assessor Parcel Number (APN). Requires specifying the state and/or county along with the APN string.\n"
+        },
+        {
+          "info": {
+            "name": "Owner Name Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/api/v2/parcels/owner",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query",
+                "description": "Owner name string to search"
+              },
+              {
+                "name": "state_code",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter US state code to narrow the search"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Finds all properties associated with a specific owner name. Returns GeoJSON parcel features for all parcels matching the owner query.\n"
+        },
+        {
+          "info": {
+            "name": "Area Geometry Search (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/api/v2/parcels/area",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bbox",
+                "value": "",
+                "type": "query",
+                "description": "Bounding box as comma-separated min_lon,min_lat,max_lon,max_lat"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all parcels that fall within a specified geographic area defined by a GeoJSON polygon or bounding box.\n"
+        },
+        {
+          "info": {
+            "name": "Area Geometry Search (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.regrid.com/api/v2/parcels/area",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "POST variant of area search accepting a GeoJSON polygon geometry in the request body.\n"
+        },
+        {
+          "info": {
+            "name": "Parcel Path Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/parcels/path",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Regrid canonical path string (e.g., us/ca/san-francisco/1234567890)"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a parcel record using Regrid's canonical path format"
+        },
+        {
+          "info": {
+            "name": "Parcel UUID Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.regrid.com/parcels/:ll_uuid",
+            "params": [
+              {
+                "name": "ll_uuid",
+                "value": "",
+                "type": "path",
+                "description": "Regrid UUID for the parcel"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a parcel record by Regrid's internal UUID identifier"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
