@@ -35,6 +35,17 @@ tags:
   - Land Data
   - Property Data
   - GeoJSON
+  - Real-Estate
+  - Zoning
+  - Ownership
+  - Geospatial
+  - Mapping
+  - Tiles
+tags_raw:
+  - Parcels
+  - Land Data
+  - Property Data
+  - GeoJSON
   - Real Estate
   - Zoning
   - Ownership
@@ -94,6 +105,10 @@ apis:
   humanURL: https://regrid.com/api
   baseURL: https://app.regrid.com
   tags:
+  - Ownership
+  - Deeds
+  - Real-Estate
+  tags_raw:
   - Ownership
   - Deeds
   - Real Estate
