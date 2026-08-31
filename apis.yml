@@ -224,8 +224,6 @@ common:
     url: examples/parcel-point-lookup-response.json
   - type: Examples
     url: examples/parcel-area-search-request.json
-  - type: Blog
-    url: blogs/blogs.json
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
