@@ -43,7 +43,7 @@ description: >
   are available in Standard and Premium schema tiers with enterprise custom packages
   also offered.
 tags:
-  - Parcels
+  - Parcel
   - Land Data
   - Property Data
   - GeoJSON
@@ -169,6 +169,8 @@ apis:
   humanURL: https://regrid.com/parcel-api
   baseURL: https://app.regrid.com
   tags:
+  - Schema
+  tags_raw:
   - Schemas
   properties:
   - type: OpenAPI
