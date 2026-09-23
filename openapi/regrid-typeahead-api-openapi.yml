@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Regrid Parcel Metadata Typeahead API
-  description: 'RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
-
-    '
+  title: Regrid Parcel Typeahead API
+  description: RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
   version: 2.0.0
   termsOfService: https://regrid.com/terms
   contact:
@@ -25,9 +23,7 @@ paths:
     get:
       operationId: getTypeahead
       summary: Typeahead Address Suggestions
-      description: 'Provides real-time address autocomplete suggestions during user input. Returns a list of matching address strings for UI search components.
-
-        '
+      description: Provides real-time address autocomplete suggestions during user input. Returns a list of matching address strings for UI search components.
       tags:
       - Typeahead
       parameters:
@@ -69,6 +65,15 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   responses:
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
     RateLimited:
       description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
       content:
@@ -81,15 +86,6 @@ components:
               retry_after:
                 type: integer
                 description: Seconds to wait before retrying
-    Unauthorized:
-      description: Unauthorized — invalid or missing API token
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
   securitySchemes:
     apiToken:
       type: apiKey

@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Regrid Parcel Metadata Parcel Query API
-  description: 'RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
-
-    '
+  title: Regrid Parcel Parcel Query API
+  description: RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
   version: 2.0.0
   termsOfService: https://regrid.com/terms
   contact:
@@ -25,9 +23,7 @@ paths:
     get:
       operationId: queryParcels
       summary: Query by Field (GET)
-      description: 'Filter the entire nationwide parcel dataset by any indexed schema attributes. Described as the most powerful endpoint; supports combining field filters with optional geometry constraints.
-
-        '
+      description: Filter the entire nationwide parcel dataset by any indexed schema attributes. Described as the most powerful endpoint; supports combining field filters with optional geometry constraints.
       tags:
       - Parcel Query
       parameters:
@@ -124,38 +120,42 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  responses:
-    RateLimited:
-      description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-              retry_after:
-                type: integer
-                description: Seconds to wait before retrying
-    Unauthorized:
-      description: Unauthorized — invalid or missing API token
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
   schemas:
+    ParcelFeature:
+      type: object
+      description: GeoJSON Feature representing a single parcel record
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        id:
+          type: string
+          description: Regrid internal parcel ID
+        geometry:
+          $ref: '#/components/schemas/GeoJSONPolygon'
+        properties:
+          $ref: '#/components/schemas/ParcelProperties'
+    ParcelFeatureCollection:
+      type: object
+      description: GeoJSON FeatureCollection containing parcel records
+      properties:
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParcelFeature'
+        results:
+          type: integer
+          description: Total number of results returned
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for the next page of results (if paginated)
     GeoJSONPolygon:
       type: object
       description: GeoJSON Polygon geometry object
@@ -338,40 +338,37 @@ components:
           type: string
           format: date-time
           description: Timestamp of last Regrid data update
-    ParcelFeature:
-      type: object
-      description: GeoJSON Feature representing a single parcel record
-      properties:
-        type:
-          type: string
-          enum:
-          - Feature
-        id:
-          type: string
-          description: Regrid internal parcel ID
-        geometry:
-          $ref: '#/components/schemas/GeoJSONPolygon'
-        properties:
-          $ref: '#/components/schemas/ParcelProperties'
-    ParcelFeatureCollection:
-      type: object
-      description: GeoJSON FeatureCollection containing parcel records
-      properties:
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/ParcelFeature'
-        results:
-          type: integer
-          description: Total number of results returned
-        next:
-          type: string
-          nullable: true
-          description: URL for the next page of results (if paginated)
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    RateLimited:
+      description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              retry_after:
+                type: integer
+                description: Seconds to wait before retrying
   securitySchemes:
     apiToken:
       type: apiKey

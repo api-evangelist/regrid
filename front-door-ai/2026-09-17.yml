@@ -1,0 +1,29 @@
+# Front Door AI Index — regrid — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: regrid
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: regrid.com
+  final_host: regrid.com
+  ownership: own
+  owner: regrid
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 16
+  host_score: 16
+  density: 14.0
+  words: 1143
+  tiers:
+    agentic: 6
+    core: 10
+    model: 0
+  ambiguous: 4
+  top_terms:
+    AI: 6
+    MCP: 6
+    intelligence: 4
+    ML: 2
+    machine learning: 2

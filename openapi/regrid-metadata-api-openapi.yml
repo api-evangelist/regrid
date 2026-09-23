@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Regrid Parcel Metadata API
-  description: 'RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
-
-    '
+  description: RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
   version: 2.0.0
   termsOfService: https://regrid.com/terms
   contact:
@@ -25,9 +23,7 @@ paths:
     get:
       operationId: getVerse
       summary: County Coverage Metadata
-      description: 'Returns county-level metadata including coverage status, field availability, and data refresh dates for all covered US counties and Canadian provinces.
-
-        '
+      description: Returns county-level metadata including coverage status, field availability, and data refresh dates for all covered US counties and Canadian provinces.
       tags:
       - Metadata
       parameters:
@@ -173,6 +169,30 @@ components:
                 type: integer
               requests:
                 type: integer
+    UsageSummary:
+      type: object
+      description: API usage summary against plan limits
+      properties:
+        plan:
+          type: string
+          description: Current subscription plan name
+        period_start:
+          type: string
+          format: date
+          description: Current billing period start date
+        period_end:
+          type: string
+          format: date
+          description: Current billing period end date
+        records_used:
+          type: integer
+          description: Parcel records returned in the current period
+        records_limit:
+          type: integer
+          description: Plan record limit for the current period
+        records_remaining:
+          type: integer
+          description: Records remaining in the current period
     CountyCoverage:
       type: object
       description: County-level coverage metadata record
@@ -198,30 +218,6 @@ components:
           items:
             type: string
           description: List of schema fields available for this county
-    UsageSummary:
-      type: object
-      description: API usage summary against plan limits
-      properties:
-        plan:
-          type: string
-          description: Current subscription plan name
-        period_start:
-          type: string
-          format: date
-          description: Current billing period start date
-        period_end:
-          type: string
-          format: date
-          description: Current billing period end date
-        records_used:
-          type: integer
-          description: Parcel records returned in the current period
-        records_limit:
-          type: integer
-          description: Plan record limit for the current period
-        records_remaining:
-          type: integer
-          description: Records remaining in the current period
   responses:
     Unauthorized:
       description: Unauthorized — invalid or missing API token

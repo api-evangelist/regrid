@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Regrid Parcel Metadata Parcel Search API
-  description: 'RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
-
-    '
+  title: Regrid Parcel Parcel Search API
+  description: RESTful API for querying US and Canadian parcel records by location (lat/lon), street address, assessor parcel number (APN), owner name, or polygon area. Returns GeoJSON FeatureCollections with parcel boundaries, ownership, zoning, assessed values, and deed attributes. Supports up to 1,000 records per request with usage tracked by parcel records returned for billing purposes.
   version: 2.0.0
   termsOfService: https://regrid.com/terms
   contact:
@@ -25,9 +23,7 @@ paths:
     get:
       operationId: getParcelsAtPoint
       summary: Point Lookup
-      description: 'Returns parcel records at or near a given geographic coordinate. Accepts latitude/longitude and returns matching GeoJSON parcel features.
-
-        '
+      description: Returns parcel records at or near a given geographic coordinate. Accepts latitude/longitude and returns matching GeoJSON parcel features.
       tags:
       - Parcel Search
       parameters:
@@ -149,9 +145,7 @@ paths:
     get:
       operationId: getParcelsByAddress
       summary: Address Lookup
-      description: 'Locates parcel records matching a street address in the US and Puerto Rico. Returns GeoJSON parcel features for matching addresses.
-
-        '
+      description: Locates parcel records matching a street address in the US and Puerto Rico. Returns GeoJSON parcel features for matching addresses.
       tags:
       - Parcel Search
       parameters:
@@ -197,9 +191,7 @@ paths:
     get:
       operationId: getParcelsByAPN
       summary: APN Lookup
-      description: 'Retrieves parcel records by Assessor Parcel Number (APN). Requires specifying the state and/or county along with the APN string.
-
-        '
+      description: Retrieves parcel records by Assessor Parcel Number (APN). Requires specifying the state and/or county along with the APN string.
       tags:
       - Parcel Search
       parameters:
@@ -259,9 +251,7 @@ paths:
     get:
       operationId: getParcelsByOwner
       summary: Owner Name Lookup
-      description: 'Finds all properties associated with a specific owner name. Returns GeoJSON parcel features for all parcels matching the owner query.
-
-        '
+      description: Finds all properties associated with a specific owner name. Returns GeoJSON parcel features for all parcels matching the owner query.
       tags:
       - Parcel Search
       parameters:
@@ -313,9 +303,7 @@ paths:
     get:
       operationId: getParcelsByArea
       summary: Area Geometry Search (GET)
-      description: 'Returns all parcels that fall within a specified geographic area defined by a GeoJSON polygon or bounding box.
-
-        '
+      description: Returns all parcels that fall within a specified geographic area defined by a GeoJSON polygon or bounding box.
       tags:
       - Parcel Search
       parameters:
@@ -360,9 +348,7 @@ paths:
     post:
       operationId: postParcelsByArea
       summary: Area Geometry Search (POST)
-      description: 'POST variant of area search accepting a GeoJSON polygon geometry in the request body.
-
-        '
+      description: POST variant of area search accepting a GeoJSON polygon geometry in the request body.
       tags:
       - Parcel Search
       requestBody:
@@ -466,47 +452,22 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    RateLimited:
-      description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-              retry_after:
-                type: integer
-                description: Seconds to wait before retrying
-    NotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    Unauthorized:
-      description: Unauthorized — invalid or missing API token
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
   schemas:
+    ParcelFeature:
+      type: object
+      description: GeoJSON Feature representing a single parcel record
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        id:
+          type: string
+          description: Regrid internal parcel ID
+        geometry:
+          $ref: '#/components/schemas/GeoJSONPolygon'
+        properties:
+          $ref: '#/components/schemas/ParcelProperties'
     GeoJSONPolygon:
       type: object
       description: GeoJSON Polygon geometry object
@@ -524,6 +485,26 @@ components:
               type: array
               items:
                 type: number
+    ParcelFeatureCollection:
+      type: object
+      description: GeoJSON FeatureCollection containing parcel records
+      properties:
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParcelFeature'
+        results:
+          type: integer
+          description: Total number of results returned
+        next:
+          type:
+          - string
+          - 'null'
+          description: URL for the next page of results (if paginated)
     ParcelProperties:
       type: object
       description: Parcel attribute properties in the standard schema
@@ -689,40 +670,46 @@ components:
           type: string
           format: date-time
           description: Timestamp of last Regrid data update
-    ParcelFeature:
-      type: object
-      description: GeoJSON Feature representing a single parcel record
-      properties:
-        type:
-          type: string
-          enum:
-          - Feature
-        id:
-          type: string
-          description: Regrid internal parcel ID
-        geometry:
-          $ref: '#/components/schemas/GeoJSONPolygon'
-        properties:
-          $ref: '#/components/schemas/ParcelProperties'
-    ParcelFeatureCollection:
-      type: object
-      description: GeoJSON FeatureCollection containing parcel records
-      properties:
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/ParcelFeature'
-        results:
-          type: integer
-          description: Total number of results returned
-        next:
-          type: string
-          nullable: true
-          description: URL for the next page of results (if paginated)
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    RateLimited:
+      description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              retry_after:
+                type: integer
+                description: Seconds to wait before retrying
   securitySchemes:
     apiToken:
       type: apiKey
