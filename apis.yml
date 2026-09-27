@@ -47,7 +47,7 @@ tags:
   - Land Data
   - Property Data
   - GeoJSON
-  - Real-Estate
+  - Real Estate
   - Zoning
   - Ownership
   - Geospatial
@@ -64,6 +64,7 @@ tags_raw:
   - Geospatial
   - Mapping
   - Tiles
+  - Real-Estate
 apis:
 - name: Regrid Tile API
   description: >
@@ -119,11 +120,12 @@ apis:
   tags:
   - Ownership
   - Deeds
-  - Real-Estate
+  - Real Estate
   tags_raw:
   - Ownership
   - Deeds
   - Real Estate
+  - Real-Estate
   properties:
   - type: Documentation
     url: https://support.regrid.com/api/parcel-api-endpoints

@@ -65,15 +65,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   responses:
-    Unauthorized:
-      description: Unauthorized — invalid or missing API token
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
     RateLimited:
       description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
       content:
@@ -86,6 +77,15 @@ components:
               retry_after:
                 type: integer
                 description: Seconds to wait before retrying
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   securitySchemes:
     apiToken:
       type: apiKey

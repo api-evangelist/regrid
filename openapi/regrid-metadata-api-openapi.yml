@@ -151,24 +151,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    DetailedUsage:
-      type: object
-      description: Granular usage breakdown by endpoint and date
-      properties:
-        usage:
-          type: array
-          items:
-            type: object
-            properties:
-              date:
-                type: string
-                format: date
-              endpoint:
-                type: string
-              records:
-                type: integer
-              requests:
-                type: integer
     UsageSummary:
       type: object
       description: API usage summary against plan limits
@@ -218,9 +200,27 @@ components:
           items:
             type: string
           description: List of schema fields available for this county
+    DetailedUsage:
+      type: object
+      description: Granular usage breakdown by endpoint and date
+      properties:
+        usage:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              endpoint:
+                type: string
+              records:
+                type: integer
+              requests:
+                type: integer
   responses:
-    Unauthorized:
-      description: Unauthorized — invalid or missing API token
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields
       content:
         application/json:
           schema:
@@ -228,8 +228,8 @@ components:
             properties:
               error:
                 type: string
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
       content:
         application/json:
           schema:

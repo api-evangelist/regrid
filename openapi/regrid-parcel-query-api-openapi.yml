@@ -121,21 +121,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    ParcelFeature:
-      type: object
-      description: GeoJSON Feature representing a single parcel record
-      properties:
-        type:
-          type: string
-          enum:
-          - Feature
-        id:
-          type: string
-          description: Regrid internal parcel ID
-        geometry:
-          $ref: '#/components/schemas/GeoJSONPolygon'
-        properties:
-          $ref: '#/components/schemas/ParcelProperties'
     ParcelFeatureCollection:
       type: object
       description: GeoJSON FeatureCollection containing parcel records
@@ -338,16 +323,22 @@ components:
           type: string
           format: date-time
           description: Timestamp of last Regrid data update
+    ParcelFeature:
+      type: object
+      description: GeoJSON Feature representing a single parcel record
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        id:
+          type: string
+          description: Regrid internal parcel ID
+        geometry:
+          $ref: '#/components/schemas/GeoJSONPolygon'
+        properties:
+          $ref: '#/components/schemas/ParcelProperties'
   responses:
-    Unauthorized:
-      description: Unauthorized — invalid or missing API token
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
     BadRequest:
       description: Bad request — invalid parameters or missing required fields
       content:
@@ -369,6 +360,15 @@ components:
               retry_after:
                 type: integer
                 description: Seconds to wait before retrying
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   securitySchemes:
     apiToken:
       type: apiKey
