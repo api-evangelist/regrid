@@ -150,6 +150,25 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   schemas:
     DetailedUsage:
       type: object
@@ -169,30 +188,6 @@ components:
                 type: integer
               requests:
                 type: integer
-    UsageSummary:
-      type: object
-      description: API usage summary against plan limits
-      properties:
-        plan:
-          type: string
-          description: Current subscription plan name
-        period_start:
-          type: string
-          format: date
-          description: Current billing period start date
-        period_end:
-          type: string
-          format: date
-          description: Current billing period end date
-        records_used:
-          type: integer
-          description: Parcel records returned in the current period
-        records_limit:
-          type: integer
-          description: Plan record limit for the current period
-        records_remaining:
-          type: integer
-          description: Records remaining in the current period
     CountyCoverage:
       type: object
       description: County-level coverage metadata record
@@ -218,25 +213,30 @@ components:
           items:
             type: string
           description: List of schema fields available for this county
-  responses:
-    Unauthorized:
-      description: Unauthorized — invalid or missing API token
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
+    UsageSummary:
+      type: object
+      description: API usage summary against plan limits
+      properties:
+        plan:
+          type: string
+          description: Current subscription plan name
+        period_start:
+          type: string
+          format: date
+          description: Current billing period start date
+        period_end:
+          type: string
+          format: date
+          description: Current billing period end date
+        records_used:
+          type: integer
+          description: Parcel records returned in the current period
+        records_limit:
+          type: integer
+          description: Plan record limit for the current period
+        records_remaining:
+          type: integer
+          description: Records remaining in the current period
   securitySchemes:
     apiToken:
       type: apiKey

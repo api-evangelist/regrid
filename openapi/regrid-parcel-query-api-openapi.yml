@@ -121,21 +121,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    ParcelFeature:
-      type: object
-      description: GeoJSON Feature representing a single parcel record
-      properties:
-        type:
-          type: string
-          enum:
-          - Feature
-        id:
-          type: string
-          description: Regrid internal parcel ID
-        geometry:
-          $ref: '#/components/schemas/GeoJSONPolygon'
-        properties:
-          $ref: '#/components/schemas/ParcelProperties'
     GeoJSONPolygon:
       type: object
       description: GeoJSON Polygon geometry object
@@ -173,6 +158,21 @@ components:
           - string
           - 'null'
           description: URL for the next page of results (if paginated)
+    ParcelFeature:
+      type: object
+      description: GeoJSON Feature representing a single parcel record
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        id:
+          type: string
+          description: Regrid internal parcel ID
+        geometry:
+          $ref: '#/components/schemas/GeoJSONPolygon'
+        properties:
+          $ref: '#/components/schemas/ParcelProperties'
     ParcelProperties:
       type: object
       description: Parcel attribute properties in the standard schema
@@ -339,8 +339,8 @@ components:
           format: date-time
           description: Timestamp of last Regrid data update
   responses:
-    Unauthorized:
-      description: Unauthorized — invalid or missing API token
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields
       content:
         application/json:
           schema:
@@ -348,8 +348,8 @@ components:
             properties:
               error:
                 type: string
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
       content:
         application/json:
           schema:

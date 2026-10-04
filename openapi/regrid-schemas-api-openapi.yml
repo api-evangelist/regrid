@@ -152,6 +152,16 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   schemas:
     SchemaDefinition:
       type: object
@@ -174,16 +184,6 @@ components:
               indexed:
                 type: boolean
                 description: Whether the field is indexed for query filtering
-  responses:
-    Unauthorized:
-      description: Unauthorized — invalid or missing API token
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
   securitySchemes:
     apiToken:
       type: apiKey

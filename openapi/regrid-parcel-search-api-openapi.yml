@@ -452,62 +452,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    NotFound:
-      description: Record not found
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    Unauthorized:
-      description: Unauthorized — invalid or missing API token
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    RateLimited:
-      description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-              retry_after:
-                type: integer
-                description: Seconds to wait before retrying
   schemas:
-    ParcelFeature:
-      type: object
-      description: GeoJSON Feature representing a single parcel record
-      properties:
-        type:
-          type: string
-          enum:
-          - Feature
-        id:
-          type: string
-          description: Regrid internal parcel ID
-        geometry:
-          $ref: '#/components/schemas/GeoJSONPolygon'
-        properties:
-          $ref: '#/components/schemas/ParcelProperties'
     GeoJSONPolygon:
       type: object
       description: GeoJSON Polygon geometry object
@@ -545,6 +490,21 @@ components:
           - string
           - 'null'
           description: URL for the next page of results (if paginated)
+    ParcelFeature:
+      type: object
+      description: GeoJSON Feature representing a single parcel record
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        id:
+          type: string
+          description: Regrid internal parcel ID
+        geometry:
+          $ref: '#/components/schemas/GeoJSONPolygon'
+        properties:
+          $ref: '#/components/schemas/ParcelProperties'
     ParcelProperties:
       type: object
       description: Parcel attribute properties in the standard schema
@@ -710,6 +670,46 @@ components:
           type: string
           format: date-time
           description: Timestamp of last Regrid data update
+  responses:
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    NotFound:
+      description: Record not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    RateLimited:
+      description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              retry_after:
+                type: integer
+                description: Seconds to wait before retrying
   securitySchemes:
     apiToken:
       type: apiKey
