@@ -43,7 +43,6 @@ description: >
   are available in Standard and Premium schema tiers with enterprise custom packages
   also offered.
 tags:
-  - Parcel
   - Land Data
   - Property Data
   - GeoJSON
@@ -53,8 +52,8 @@ tags:
   - Geospatial
   - Mapping
   - Tiles
+  - Land Parcels
 tags_raw:
-  - Parcels
   - Land Data
   - Property Data
   - GeoJSON
@@ -65,6 +64,7 @@ tags_raw:
   - Mapping
   - Tiles
   - Real-Estate
+  - Land Parcels
 apis:
 - name: Regrid Tile API
   description: >
@@ -231,3 +231,5 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-tags-removed:
+- Parcel
