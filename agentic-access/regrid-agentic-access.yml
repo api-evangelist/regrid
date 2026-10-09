@@ -1,19 +1,86 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/regrid-parcel-openapi.yml
+source: openapi/regrid-metadata-api-openapi.yml, openapi/regrid-parcel-query-api-openapi.yml,
+  openapi/regrid-parcel-search-api-openapi.yml, openapi/regrid-schemas-api-openapi.yml, openapi/regrid-typeahead-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 22
   by_action_class:
-    connected: 18
-    acting: 4
+    connected: 19
+    acting: 3
   by_consequence:
-    read: 18
-    write: 4
+    read: 19
+    write: 3
   human_in_the_loop_required: 0
 operations:
+- path: /verse
+  method: get
+  operationId: getVerse
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usage
+  method: get
+  operationId: getUsage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /usage/detailed
+  method: get
+  operationId: getDetailedUsage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /report
+  method: post
+  operationId: submitDataReport
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v2/parcels/query
+  method: get
+  operationId: queryParcels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2/parcels/query
+  method: post
+  operationId: postQueryParcels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/v2/parcels/point
   method: get
   operationId: getParcelsAtPoint
@@ -96,42 +163,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /api/v2/parcels/query
-  method: get
-  operationId: queryParcels
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v2/parcels/query
-  method: post
-  operationId: postQueryParcels
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /parcels/typeahead
-  method: get
-  operationId: getTypeahead
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /parcels/path
   method: get
   operationId: getParcelByPath
@@ -212,9 +243,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /verse
+- path: /parcels/typeahead
   method: get
-  operationId: getVerse
+  operationId: getTypeahead
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -222,39 +253,3 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /usage
-  method: get
-  operationId: getUsage
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /usage/detailed
-  method: get
-  operationId: getDetailedUsage
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /report
-  method: post
-  operationId: submitDataReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
