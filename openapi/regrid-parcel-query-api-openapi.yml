@@ -121,23 +121,6 @@ paths:
           $ref: '#/components/responses/RateLimited'
 components:
   schemas:
-    GeoJSONPolygon:
-      type: object
-      description: GeoJSON Polygon geometry object
-      properties:
-        type:
-          type: string
-          enum:
-          - Polygon
-          - MultiPolygon
-        coordinates:
-          type: array
-          items:
-            type: array
-            items:
-              type: array
-              items:
-                type: number
     ParcelFeatureCollection:
       type: object
       description: GeoJSON FeatureCollection containing parcel records
@@ -338,25 +321,24 @@ components:
           type: string
           format: date-time
           description: Timestamp of last Regrid data update
+    GeoJSONPolygon:
+      type: object
+      description: GeoJSON Polygon geometry object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                type: number
   responses:
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-    Unauthorized:
-      description: Unauthorized — invalid or missing API token
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
     RateLimited:
       description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
       content:
@@ -369,6 +351,24 @@ components:
               retry_after:
                 type: integer
                 description: Seconds to wait before retrying
+    Unauthorized:
+      description: Unauthorized — invalid or missing API token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
   securitySchemes:
     apiToken:
       type: apiKey

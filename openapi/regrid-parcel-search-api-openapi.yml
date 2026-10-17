@@ -453,23 +453,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    GeoJSONPolygon:
-      type: object
-      description: GeoJSON Polygon geometry object
-      properties:
-        type:
-          type: string
-          enum:
-          - Polygon
-          - MultiPolygon
-        coordinates:
-          type: array
-          items:
-            type: array
-            items:
-              type: array
-              items:
-                type: number
     ParcelFeatureCollection:
       type: object
       description: GeoJSON FeatureCollection containing parcel records
@@ -670,9 +653,38 @@ components:
           type: string
           format: date-time
           description: Timestamp of last Regrid data update
+    GeoJSONPolygon:
+      type: object
+      description: GeoJSON Polygon geometry object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+          - MultiPolygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            items:
+              type: array
+              items:
+                type: number
   responses:
-    BadRequest:
-      description: Bad request — invalid parameters or missing required fields
+    RateLimited:
+      description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              retry_after:
+                type: integer
+                description: Seconds to wait before retrying
+    NotFound:
+      description: Record not found
       content:
         application/json:
           schema:
@@ -689,8 +701,8 @@ components:
             properties:
               error:
                 type: string
-    NotFound:
-      description: Record not found
+    BadRequest:
+      description: Bad request — invalid parameters or missing required fields
       content:
         application/json:
           schema:
@@ -698,18 +710,6 @@ components:
             properties:
               error:
                 type: string
-    RateLimited:
-      description: Too many requests — rate limit exceeded (max 200 req/min or 10 concurrent)
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-              retry_after:
-                type: integer
-                description: Seconds to wait before retrying
   securitySchemes:
     apiToken:
       type: apiKey
