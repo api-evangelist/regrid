@@ -1,0 +1,33 @@
+edges:
+- partner_name: Overture Maps Foundation (members)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://overturemaps.org/about/members/
+  category: open map data consortium membership
+  partner_tier: contributor
+  contract_reference:
+    register: Overture Maps Foundation members (overturemaps.org/about/members; landscape.overturemaps.org/data/full.json)
+    standard: Overture Maps (GERS)
+    spec_file: null
+    role: overture-member
+    registered_name: Regrid
+    register_id: overture-maps-members--contributor--regrid
+    matched_domain: regrid.com
+    matched_by: domain
+    signal_note: 'participation only: membership level is partner_tier, never counted'
+    detected_by: sweep-overture-maps-members.py
+    detected: '2026-10-23'
+  detected_by: sweep-overture-maps-members.py
+  first_seen: '2026-10-23'
+generated: '2026-10-23'
+method: searched
+source:
+- https://overturemaps.org/about/members/
+- https://docs.overturemaps.org/attribution/
+checked:
+- https://docs.overturemaps.org/attribution/
+- https://overturemaps.org/about/members/
